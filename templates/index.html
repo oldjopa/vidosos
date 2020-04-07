@@ -1,5 +1,26 @@
 {% extends "header.html" %}
 
 {% block content %}
-lol
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>video</title>
+  <link rel="stylesheet" type="text/css" href="chrome-extension://napifgkjbjeodgmfjmgncljmnmdefpbf/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <video width="400" height="300" id="video-player">
+      <source src="/vidosos/static/video/first.ogv" type="video/ogg; codecs=&quot;theora, vorbis&quot;">
+      <source src="/vidosos/static/video/first.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+      <source src="/vidosos/static/video/first.webm" type="video/webm; codecs=&quot;vp8, vorbis&quot;">
+      Тег video не поддерживается вашим браузером.
+    </video>
+    <div><button id="play">Play</button></div>
+  </div>
+   <script src="js.js"></script>
+</body>
+
+</html>
 {% endblock %}
