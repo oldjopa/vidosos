@@ -1,26 +1,26 @@
-{% extends "header.html" %}
-
-{% block content %}
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>video</title>
-  <link rel="stylesheet" type="text/css" href="chrome-extension://napifgkjbjeodgmfjmgncljmnmdefpbf/styles.css">
+    <meta charset="UTF-8">
+    <title>bebebe s bababa</title>
+    <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body>
-  <div class="container">
-    <video width="400" height="300" id="video-player">
-      <source src="/vidosos/static/video/first.ogv" type="video/ogg; codecs=&quot;theora, vorbis&quot;">
-      <source src="/vidosos/static/video/first.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
-      <source src="/vidosos/static/video/first.webm" type="video/webm; codecs=&quot;vp8, vorbis&quot;">
-      Тег video не поддерживается вашим браузером.
-    </video>
-    <div><button id="play">Play</button></div>
-  </div>
-   <script src="js.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <div id="app">
+            <video width="400" height="300" id="video-player">
+              <source :src="src" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+            </video>
+            <div><button id="play">Play</button></div>
+            <div><button src="/index">Skip</button></div>
+            <div><button @click="like" id="like">like</button></div>
+    </div>
+    <script src="js.js"></script>
 </body>
 
 </html>
-{% endblock %}
