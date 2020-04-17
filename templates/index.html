@@ -4,30 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>bebebe s bababa</title>
-    <link href="static/styles/styles.css" rel="stylesheet"/>
-    <!--<link href="/vidosos/static/styles/styles.css" rel="stylesheet"/>-->
+    <!--<link href="static/styles/styles.css" rel="stylesheet"/>-->
+    <link href="/vidosos/static/styles/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
-<div id="app">
-    <video width="400" height="300" id="video-player">
-        <!--<source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">-->
-        <source src="static/video/first.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
-    </video>
-    <div>
-        <button class="btn" id="play"><i class="fa fa-play"></i></button>
-        <button class="btn"><i class="fas fa-step-forward"></i></button>
-        <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <div class="top">
+        <div id="app" class="cntr">
+            <video width="800" id="video-player" ref="videoRef">
+                <source src="/vidosos/static/video/first.mp4"
+                    type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+                <!--<source src={{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">-->
+            </video>
+            <div>
+                <button class="btn" @click="play"><i :class="ic"></i></button>
+                <button class="btn"><i class="fas fa-step-forward"></i></button>
+                <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+            </div>
+        </div>
     </div>
-</div>
-<script src="static/styles/js.js"></script>
-<!--<script src="/vidosos/static/styles/js.js"></script>-->
+    <!--<script src="static/styles/js.js"></script>-->
+    <script src="/vidosos/static/styles/js.js"></script>
 </body>
 
 </html>
