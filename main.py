@@ -1,10 +1,10 @@
 from flask import *
-from vidosos.data import db_session
+from data import db_session
 from flask_login.login_manager import *
 from flask_login.utils import *
-from vidosos.data.forms import *
-from vidosos.data.user import User
-from vidosos.data.video import Video
+from data.forms import *
+from data.user import User
+from data.video import Video
 
 
 app = Flask(__name__)

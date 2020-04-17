@@ -30,7 +30,8 @@
 }
 
 html {
-  background: url(/vidosos/static/styles/back.bmp) no-repeat; /* Задаём фон GIF-картинкой */
+  /* background: url(/vidosos/static/styles/back.bmp) no-repeat; */
+  background: url(back.bmp) no-repeat;
   height: 100%; /* 100% высота страницы */
   align-items: center;
   text-align: center;
