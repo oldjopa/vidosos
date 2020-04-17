@@ -7,6 +7,40 @@
     cursor: pointer;
 }
 
+.cntr{
+  margin-right: 150px;
+  margin-left: 150px;
+  text-align: left;
+  min-width: fit-content;
+}
+
+.top{
+  margin-right: 150px;
+  margin-left: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: rgb(13, 0, 43);
+  text-align: center;
+  height: fit-content;
+  min-width: fit-content;
+}
+
 .btn:hover {
     background-color: RoyalBlue;
+}
+
+html {
+  background: url(/vidosos/static/styles/back.bmp) no-repeat; /* Задаём фон GIF-картинкой */
+  height: 100%; /* 100% высота страницы */
+  align-items: center;
+  text-align: center;
+}
+
+#dynamic {
+  fill:#333;
+  padding:0 5px;
+}
+          
+#dynamic.off {
+  fill:#ccc;
 }
