@@ -2,7 +2,7 @@ const vm = new Vue({
     el: '#app',
     data: {
         id: null,
-        pl: true,
+        pl: false,
         ic: 'fas fa-play'
     },
     methods: {
