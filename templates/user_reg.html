@@ -1,12 +1,14 @@
+{% extends "header.html" %}
+
 {% block content %}
-<h1>{{title}}</h1>
+<h1>{{ title }}</h1>
 <form action="" method="post">
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
 	<p>
         {{ form.login.label }}<br>
         {{ form.login(class="form-control", type="login") }}<br>
-        {% for error in form.email.errors %}
+        {% for error in form.login.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
@@ -42,7 +44,7 @@
     <p>
         {{ form.gender.label }}<br>
         {{ form.gender(class="form-control") }}<br>
-        {% for error in form.name.errors %}
+        {% for error in form.gender.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
@@ -51,7 +53,7 @@
     <p>
         {{ form.age.label }}<br>
         {{ form.age(class="form-control") }}<br>
-        {% for error in form.about.errors %}
+        {% for error in form.age.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
