@@ -9,6 +9,20 @@
   color: rgb(163, 10, 180);
 }
 
+.form {
+  font-family: 'FontName';
+  font-size: 20px;
+  color: rgb(163, 10, 180);
+  margin-right: 150px;
+  margin-left: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: rgb(13, 0, 43);
+  text-align: center;
+  height: fit-content;
+  min-width: fit-content;
+}
+
 .btn {
     background-color: DodgerBlue;
     border: none;

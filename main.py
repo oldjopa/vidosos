@@ -28,29 +28,6 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        session = db_session.create_session()
-        user = session.query(User).filter(User.login == form.login.data).first()
-        session.commit()
-        if user and user.check_password(form.password.data):
-            login_user(user, remember=form.remember_me.data)
-            return redirect("/")
-        return render_template('user_log.html', title='Авторизация',
-                               message="Неправильный логин или пароль",
-                               form=form)
-    return render_template('user_log.html', title='Авторизация', form=form)
-
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect("/")
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -65,10 +42,10 @@ def register():
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
-            login=form.login,
-            age=form.age,
-            gender=form.gender,
-            email=form.email
+            login=form.login.data,
+            age=form.age.data,
+            gender=form.gender.data,
+            email=form.email.data
         )
         user.set_password(form.password.data)
         session.add(user)
