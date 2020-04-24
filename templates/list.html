@@ -1,0 +1,39 @@
+<!--{% extends "header.html" %}-->
+<!---->
+<!--{% block content %}-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>bebebe s bababa</title>
+    <link href="static/styles/styles.css" rel="stylesheet" />
+    <!--<link href="/vidosos/static/styles/styles.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    info: null
+                };
+            },
+            mounted() {
+                axios
+                    .get('localhost:/api/jobs')
+                    .then(response => (this.info = response));
+            }
+        });
+    </script>
+    <div id="app">
+        {{ info }}
+      </div>
+</body>
+
+</html>
+<!--{% endblock %}-->

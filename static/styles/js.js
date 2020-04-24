@@ -1,17 +1,16 @@
 const vm = new Vue({
     el: '#app',
     data: {
-        id: null,
+        id: ';',
         pl: false,
         ic: 'fas fa-play'
     },
     methods: {
         like() {
-            axios
-            .get('localhost/api/current')
-            .then(response => (this.id = responce))
-            .post('localhost/api/like/' + id)
-            .catch(error => console.log(error))
+            axios.get('api/like').then(response => {
+            this.id = response.data
+          })
+            alert(this.id)
         },
         play() {
             if (this.pl) {
