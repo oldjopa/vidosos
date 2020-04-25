@@ -25,14 +25,13 @@ def load_user(user_id):
     return session.query(User).get(user_id)
 
 
-a = ['/static/video/first.mp4', '/static/video/second.mp4']
 import random   # убрать потом
 
 
 @app.route('/')
 def index():
     # здесь мы определяем какое видео отослать пользователю
-    src = random.choice(a)      # для отладки
+    src = '/static/video/{}.mp4'.format(random.randint(1, 9))      # для отладки
     vidosos_api.set_video_id(54)    # скармливаем апи id видео
     return render_template("index.html", src=src)
 
