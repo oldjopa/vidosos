@@ -20,13 +20,21 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     db_session.global_init('db/videos.sqlite')
+    vidosos_api.set_user_id(user_id)
     session = db_session.create_session()
     return session.query(User).get(user_id)
 
 
+a = ['/static/video/first.mp4', '/static/video/second.mp4']
+import random   # убрать потом
+
+
 @app.route('/')
 def index():
-    return render_template("index.html")
+    # здесь мы определяем какое видео отослать пользователю
+    src = random.choice(a)      # для отладки
+    vidosos_api.set_video_id(54)    # скармливаем апи id видео
+    return render_template("index.html", src=src)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -128,6 +136,7 @@ def delete_favourite_video(video_id):
 @login_required
 def logout():
     logout_user()
+    vidosos_api.set_user_id(-1)
     return redirect("/")
 
 
