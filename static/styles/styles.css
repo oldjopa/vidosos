@@ -78,3 +78,27 @@ html {
 #dynamic.off {
   fill:#ccc;
 }
+
+#progress {
+    width:290px;
+}
+
+#total {
+    width:100%;
+    background:#999;
+}
+
+#buffered {
+    background:#ccc;
+}
+
+#current {
+    background:#eee;
+    line-height:0;
+    height:10px;
+}
+
+#time {
+    color:#999;
+    font-size:12pt;
+}

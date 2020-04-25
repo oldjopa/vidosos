@@ -20,11 +20,10 @@
     <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
     <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
     <div id="lol">
-  {{ id }}
 </div>
     <div class="top">
         <div id="app" class="cntr">
-            <video width="800" id="video-player" ref="videoRef">
+            <video width="800" id="video-player" ref="videoRef" @click="play">
                 <!--<source src="/vidosos/static/video/first.mp4"-->
                     <!--type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">-->
                 <!--<source src="static/video/first.mp4" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">-->
@@ -34,6 +33,15 @@
                 <button class="btn" @click="play"><i :class="ic"></i></button>
                 <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
                 <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+                <span id="progress">
+    <span id="total">
+        <span ref="buffered"><span ref="current">​</span></span>
+    </span>
+</span>
+<span ref="time">
+    <span ref="currenttime">00:00</span> /
+    <span ref="duration">00:00</span>
+</span>
             </div>
         </div>
     </div>
