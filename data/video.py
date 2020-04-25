@@ -9,4 +9,3 @@ class Video(SqlAlchemyBase):
                            autoincrement=True)
     description = sqlalchemy.Column(sqlalchemy.String)
     url = sqlalchemy.Column(sqlalchemy.String)
-
