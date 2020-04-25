@@ -30,15 +30,17 @@
                 <button class="btn" @click="play"><i :class="ic"></i></button>
                 <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
                 <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
-                <span ref="progress">
-                    <span ref="total">
-                        <span ref="buffered"><span ref="current">​</span></span>
+                <div>
+                    <span id='progress' ref="progress">
+                        <span id='total' ref="total">
+                            <span id='buffered' ref="buffered"><span ref="current">​</span></span>
+                        </span>
                     </span>
-                </span>
-                <span ref="time">
-                    <span ref="currenttime">00:00</span> /
-                    <span ref="duration">00:00</span>
-                </span>
+                    <span id='time' ref="time">
+                        <span ref="currenttime">00:00</span> /
+                        <span ref="duration">00:00</span>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -29,6 +29,9 @@ const vm = new Vue({
             this.$refs.currenttime.innerText = this.formatTime(this.$refs.videoRef.currentTime, this.hasHours);
             progress = Math.floor(this.$refs.videoRef.currentTime) / Math.floor(this.$refs.videoRef.duration);
             this.$refs.progress[0].style.width = Math.floor(progress * this.$refs.total.width()) + "px";
+            console.log(this.$refs.progress[0].style.width)
+            console.log(Math.floor(progress * this.$refs.total.width()) + "px")
+
         },
 
         can_play() {
