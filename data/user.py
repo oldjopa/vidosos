@@ -13,7 +13,7 @@ class User(SqlAlchemyBase, UserMixin):
     age = sqlalchemy.Column(sqlalchemy.Integer)
     gender = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String)
-    role = (sqlalchemy.Integer)
+    role = sqlalchemy.Integer
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
