@@ -112,7 +112,7 @@ def delete_my_video(video_id):
 
 
 @app.route('/delete_favourite_video/<video_id>')
-def delete_my_video(video_id):
+def delete_favourite_video(video_id):
     session = db_session.create_session()
     video = session.query(Video).filter(Video.id == video_id).first()
     if video:
