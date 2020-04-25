@@ -5,13 +5,18 @@ from flask_login.utils import *
 from data.forms import *
 from data.user import User
 from data.video import Video
+from data.assotiation_tables import *
 import vidosos_api
 
-UPLOAD_FOLDER = './videos'
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = "videos\\"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = set("mp4")
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -83,12 +88,38 @@ def profile():
     return render_template('user.html')
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+
+@app.route('/add_video', methods=['GET', 'POST'])
+def add_video():
+    form = AddVideo()
+    if form.validate_on_submit():
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(path_video)
+            session = db_session.create_session()
+            video = Video(
+                description=form.description.data,
+                url=path_video
+            )
+            session.add(video)
+            session.commit()
+            return redirect('/my_videos')
+    return render_template('add_video.html', form=form,
+                           title='Добавление видео')
+
+
 @app.route('/my_videos')
 def get_user_videos():
     session = db_session.create_session()
     users_videos = session.query(Video).filter(
-        (own_video.c.user_id == current_user.id)
-        & (Video.id == own_video.c.video_id)).all()
+        (own_video_table.c.user_id == current_user.id)
+        & (Video.id == own_video_table.c.video_id)).all()
     session.commit()
     return render_template('view_videos.html', title='Мои видео',
                            videos=users_videos)
@@ -98,8 +129,8 @@ def get_user_videos():
 def get_favourite_videos():
     session = db_session.create_session()
     users_videos = session.query(Video).filter(
-        (favourite_video.c.user_id == current_user.id)
-        & (Video.id == favourite_video.c.video_id)).all()
+        (favourite_video_table.c.user_id == current_user.id)
+        & (Video.id == favourite_video_table.c.video_id)).all()
     session.commit()
     return render_template('view_videos.html', title='Избранные видео',
                            videos=users_videos)
