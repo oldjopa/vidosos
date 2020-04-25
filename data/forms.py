@@ -5,23 +5,23 @@ from wtforms.validators import DataRequired
 
 
 class RegisterForm(FlaskForm):
-    login = StringField('Имя пользователя', validators=[DataRequired()])
-    email = EmailField('Почта', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    password_again = PasswordField('Повторите пароль', validators=[DataRequired()])
-    gender = StringField('Имя пользователя', validators=[DataRequired()])
-    age = IntegerField(u'Age')
-    submit = SubmitField('Зарегистрироваться')
+    login = StringField('Login', validators=[DataRequired()])
+    email = EmailField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password_again = PasswordField('Repeat Password', validators=[DataRequired()])
+    gender = StringField('Gender', validators=[DataRequired()])
+    age = IntegerField('Age')
+    submit = SubmitField('Register')
 
 
 class LoginForm(FlaskForm):
-    login = StringField('Имя пользователя', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Войти')
+    login = StringField('Login', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Submit')
 
 
 class AddVideo(FlaskForm):
-    file = FileField()
-    description = StringField('описание')
-    submit = SubmitField('загрузить')
+    file = FileField('File')
+    description = StringField('Description')
+    submit = SubmitField('Upload')
