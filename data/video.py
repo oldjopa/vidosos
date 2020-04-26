@@ -8,5 +8,4 @@ class Video(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True,
                            autoincrement=True)
     description = sqlalchemy.Column(sqlalchemy.String)
-    url = sqlalchemy.Column(sqlalchemy.String)
-
+    filename = sqlalchemy.Column(sqlalchemy.String)
