@@ -1,29 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ title }} {{video}}</h1>
+<h1 class="text-center">{{ title }}</h1>
 {% for video in videos %}
-<div class="row my_videos-row">
-    <div class="col-sm">
+<div class="row my_videos-row" >
+    <div class="col-6 col-sm-4 col-md-5 text-center">
         <a href=""><img src="{{ video[1] }}" ></a>
     </div>
-    <div class="col-sm">
-        {{ video[0] }}
-    </div>
-</div>
-<div class="row my_videos-row">
-    <div class="col-sm">
-        <a href=""><img src="{{ video[1] }}" ></a>
-    </div>
-    <div class="col-sm">
-        {{ video[0] }}
-    </div>
-</div>
-<div class="row my_videos-row">
-    <div class="col-sm">
-        <a href=""><img src="{{ video[1] }}" ></a>
-    </div>
-    <div class="col-sm">
+    <div class="col-6 col-sm-8 col-md-7">
         {{ video[0] }}
     </div>
 </div>
