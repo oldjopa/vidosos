@@ -47,6 +47,11 @@ def index():
     return render_template("index.html", src=src)
 
 
+@app.route('/non_authorization')
+def non_authorization():
+    return 'non_authorization'  # render_template('non_authorization.html')
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -91,6 +96,8 @@ def login():
 
 @app.route('/profile')
 def profile():
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     return render_template('user.html')
 
 
@@ -101,6 +108,8 @@ def allowed_file(filename):
 
 @app.route('/add_video', methods=['GET', 'POST'])
 def add_video():
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     form = AddVideo()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -115,7 +124,10 @@ def add_video():
                     description=form.description.data,
                     filename=filename
                 )
+                user = session.query(User).filter(User.id == current_user.id).first()
+                user.own_videos.append(video)
                 session.add(video)
+                session.merge(user)
                 session.commit()
                 return redirect('/my_videos')
 
@@ -125,17 +137,25 @@ def add_video():
 
 @app.route('/my_videos')
 def get_user_videos():
+    #if not current_user.is_authenticated:
+        #return redirect('/non_authorization')
     session = db_session.create_session()
     users_videos = session.query(Video).filter(
         (own_video_table.c.user_id == current_user.id)
         & (Video.id == own_video_table.c.video_id)).all()
+    video_list = {}
+    for video in users_videos:
+        name = 'static/video/' + video.filename[:-4] + '.png'
+        video_list[video.description] = name
     session.commit()
     return render_template('view_videos.html', title='Мои видео',
-                           videos=users_videos)
+                           videos=video_list.items())
 
 
 @app.route('/favourite_videos')
 def get_favourite_videos():
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     session = db_session.create_session()
     users_videos = session.query(Video).filter(
         (favourite_video_table.c.user_id == current_user.id)
@@ -147,6 +167,8 @@ def get_favourite_videos():
 
 @app.route('/delete_my_video/<video_id>')
 def delete_my_video(video_id):
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     session = db_session.create_session()
     video = session.query(Video).filter(Video.id == video_id).first()
     if video:
@@ -160,6 +182,8 @@ def delete_my_video(video_id):
 
 @app.route('/delete_favourite_video/<video_id>')
 def delete_favourite_video(video_id):
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     session = db_session.create_session()
     video = session.query(Video).filter(Video.id == video_id).first()
     if video:
@@ -174,6 +198,8 @@ def delete_favourite_video(video_id):
 @app.route('/logout')
 @login_required
 def logout():
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     logout_user()
     vidosos_api.set_user_id(-1)
     return redirect("/")
