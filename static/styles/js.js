@@ -32,6 +32,10 @@ const vm = new Vue({
 //            console.log(Math.floor(progress * 100));
         },
 
+        set_vl() {
+            console.log(lol);
+        },
+
         prg(e) {
             console.log(e.pageX);
             console.log(this.$refs.bar.clientWidth);
