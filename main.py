@@ -7,16 +7,22 @@ from data.user import User
 from data.video import Video
 from data.assotiation_tables import *
 import vidosos_api
+from get_pic import get_pic
+from hash_name import *
 
 from werkzeug.utils import secure_filename
 import os
 
-UPLOAD_FOLDER = "videos\\"
+import hashlib
+
+UPLOAD_FOLDER = "/static/video"
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ALLOWED_EXTENSIONS = set("mp4")
+app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static\\video')
+ALLOWED_EXTENSIONS = ["mp4"]
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -96,20 +102,23 @@ def allowed_file(filename):
 @app.route('/add_video', methods=['GET', 'POST'])
 def add_video():
     form = AddVideo()
-    if form.validate_on_submit():
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(path_video)
-            session = db_session.create_session()
-            video = Video(
-                description=form.description.data,
-                url=path_video
-            )
-            session.add(video)
-            session.commit()
-            return redirect('/my_videos')
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            file = form.file.data
+            if file and allowed_file(file.filename):
+                filename = hash_password(file.filename) + '.mp4'
+                path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(path_video)
+                get_pic(path_video)
+                session = db_session.create_session()
+                video = Video(
+                    description=form.description.data,
+                    filename=filename
+                )
+                session.add(video)
+                session.commit()
+                return redirect('/my_videos')
+
     return render_template('upload_video.html', form=form,
                            title='Добавление видео')
 

@@ -22,6 +22,6 @@ class LoginForm(FlaskForm):
 
 
 class AddVideo(FlaskForm):
-    file = FileField('File')
+    file = FileField('File', validators=[DataRequired()])
     description = TextAreaField('Description')
     submit = SubmitField('Upload')
