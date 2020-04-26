@@ -124,7 +124,10 @@ def add_video():
                     description=form.description.data,
                     filename=filename
                 )
+                user = session.query(User).filter(User.id == current_user.id).first()
+                user.own_videos.append(video)
                 session.add(video)
+                session.merge(user)
                 session.commit()
                 return redirect('/my_videos')
 
@@ -134,15 +137,19 @@ def add_video():
 
 @app.route('/my_videos')
 def get_user_videos():
-    if not current_user.is_authenticated:
-        return redirect('/non_authorization')
+    #if not current_user.is_authenticated:
+        #return redirect('/non_authorization')
     session = db_session.create_session()
     users_videos = session.query(Video).filter(
         (own_video_table.c.user_id == current_user.id)
         & (Video.id == own_video_table.c.video_id)).all()
+    video_list = {}
+    for video in users_videos:
+        name = 'static/video/' + video.filename[:-4] + '.png'
+        video_list[video.description] = name
     session.commit()
     return render_template('view_videos.html', title='Мои видео',
-                           videos=users_videos)
+                           videos=video_list.items())
 
 
 @app.route('/favourite_videos')

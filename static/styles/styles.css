@@ -1,8 +1,29 @@
+html {
+  /* background: url(/vidosos/static/styles/back.bmp) no-repeat; */
+  /*background: url(back.bmp) no-repeat;*/
+  height: 100%; /* 100% высота страницы */
+  align-items: center;
+  text-align: center;
+}
+
+body{
+    background: url(back.bmp) no-repeat;
+    background-color: rgb(13, 0, 43) !important;
+    height: 100%; /* 100% высота страницы */
+}
 @font-face {
 	font-family: 'FontName'; 
 	src: url(Neoneon1.otf); 
 }
-
+.container[role=main]{
+    background: #000;
+    color: #fff;
+    margin-top:50px;
+    margin-bottom:70px;
+}
+.my_videos-row{
+    margin-bottom: 20px;
+}
 .text-1 {
 	font-family: 'FontName'; 
   font-size: 50px;
@@ -40,8 +61,6 @@
 }
 
 .top{
-  margin-right: 150px;
-  margin-left: 150px;
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: rgb(13, 0, 43);
@@ -62,13 +81,7 @@
     background-color: RoyalBlue;
 }
 
-html {
-  /* background: url(/vidosos/static/styles/back.bmp) no-repeat; */
-  background: url(back.bmp) no-repeat;
-  height: 100%; /* 100% высота страницы */
-  align-items: center;
-  text-align: center;
-}
+
 
 #dynamic {
   fill:#333;

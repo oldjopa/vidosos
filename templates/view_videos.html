@@ -1,21 +1,31 @@
-{% extends "header.html" %}
+{% extends "base.html" %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-<link rel="stylesheet"
-          href="static/styles/styles.css">
-<div class="form">
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    {{ form.csrf_token }}
-	<p>
-		{% for video in form.videos %}
-            <p>
-                {{ video.description }}
-            </p>
-    </p>
-
-    {{message}}
-</form>
+<h1>{{ title }} {{video}}</h1>
+{% for video in videos %}
+<div class="row my_videos-row">
+    <div class="col-sm">
+        <a href=""><img src="{{ video[1] }}" ></a>
+    </div>
+    <div class="col-sm">
+        {{ video[0] }}
+    </div>
 </div>
-{% endblock %}}
+<div class="row my_videos-row">
+    <div class="col-sm">
+        <a href=""><img src="{{ video[1] }}" ></a>
+    </div>
+    <div class="col-sm">
+        {{ video[0] }}
+    </div>
+</div>
+<div class="row my_videos-row">
+    <div class="col-sm">
+        <a href=""><img src="{{ video[1] }}" ></a>
+    </div>
+    <div class="col-sm">
+        {{ video[0] }}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
