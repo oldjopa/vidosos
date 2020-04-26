@@ -1,3 +1,4 @@
 *.mp4
 *.xml
 *.iml
+/static/video/*
