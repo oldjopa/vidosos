@@ -28,10 +28,16 @@ const vm = new Vue({
         timeupdate() {
             this.$refs.currenttime.innerText = this.formatTime(this.$refs.videoRef.currentTime, this.hasHours);
             progress = Math.floor(this.$refs.videoRef.currentTime) / Math.floor(this.$refs.videoRef.duration);
-            this.$refs.progress[0].style.width = Math.floor(progress * this.$refs.total.width()) + "px";
-            console.log(this.$refs.progress[0].style.width)
-            console.log(Math.floor(progress * this.$refs.total.width()) + "px")
+            this.$refs.bar.value = Math.floor(progress * 100);
+//            console.log(Math.floor(progress * 100));
+        },
 
+        prg(e) {
+            console.log(e.pageX);
+            console.log(this.$refs.bar.clientWidth);
+            x = (e.pageX - this.$refs.bar.offsetLeft) / this.$refs.bar.clientWidth;
+            this.$refs.videoRef.currentTime = x * this.$refs.videoRef.duration;
+            console.log(x  * this.$refs.videoRef.duration);
         },
 
         can_play() {

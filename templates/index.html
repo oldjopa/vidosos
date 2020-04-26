@@ -31,11 +31,7 @@
                 <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
                 <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
                 <div>
-                    <span id='progress' ref="progress">
-                        <span id='total' ref="total">
-                            <span id='buffered' ref="buffered"><span ref="current">​</span></span>
-                        </span>
-                    </span>
+                    <progress value='0' max='100' class='pr' id='bar' ref="bar" @click="prg"></progress>
                     <span id='time' ref="time">
                         <span ref="currenttime">00:00</span> /
                         <span ref="duration">00:00</span>
