@@ -41,15 +41,21 @@ import random   # убрать потом
 
 @app.route('/')
 def index():
-    # здесь мы определяем какое видео отослать пользователю
-    src = '/static/video/{}.mp4'.format(random.randint(1, 9))      # для отладки
-    vidosos_api.set_video_id(54)    # скармливаем апи id видео
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
+    session = db_session.create_session()
+    all_videos = set(session.query(Video).all())
+    user = session.query(User).filter(User.id == current_user.id).first()
+    possible_videos = all_videos  # - set(user.own_videos)
+    random_video = random.choice(list(possible_videos))
+    src = f'/static/video/{random_video.filename}'
+    vidosos_api.set_video_id(random_video.id)    # скармливаем апи id видео
     return render_template("index.html", src=src)
 
 
 @app.route('/non_authorization')
 def non_authorization():
-    return 'non_authorization'  # render_template('non_authorization.html')
+    return render_template('non_authorization.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
