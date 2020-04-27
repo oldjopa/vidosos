@@ -47,6 +47,8 @@ def index():
     all_videos = set(session.query(Video).all())
     user = session.query(User).filter(User.id == current_user.id).first()
     possible_videos = all_videos  # - set(user.own_videos)
+    if not possible_videos:
+        return redirect('/no_videos')
     random_video = random.choice(list(possible_videos))
     src = f'/static/video/{random_video.filename}'
     vidosos_api.set_video_id(random_video.id)    # скармливаем апи id видео
@@ -56,6 +58,11 @@ def index():
 @app.route('/non_authorization')
 def non_authorization():
     return render_template('non_authorization.html')
+
+
+@app.route('/no_videos')
+def no_videos():
+    return render_template('no_video.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
