@@ -36,6 +36,13 @@ footer{
     max-width: 100%;
     max-height: 200px;
 }
+.non_authorization-row{
+    margin-left: 20px;
+}
+.non_authorization-row img{
+    max-width: 100%;
+    max-height: 200%;
+}
 .text-1 {
 	font-family: 'FontName'; 
   font-size: 50px;
