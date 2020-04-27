@@ -12,35 +12,39 @@
     </head>
 
 <body-->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
-    <div id="lol">
-    </div>
-    <div class="top">
-        <div id="app" class="cntr">
-            <video width="800" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
-                @timeupdate="timeupdate">
-                <source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
-            </video>
-            <div>
-                <button class="btn" @click="play"><i :class="ic"></i></button>
-                <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
-                <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
-                <progress value='0' max='100' class='pr' id='bar' ref="bar" @click="prg"></progress>
-                <span id='time' ref="time">
-                    <span ref="currenttime">00:00</span> /
-                    <span ref="duration">00:00</span>
-                </span>
-                <input type='range' value='100' max='100' ref='volume' id='volume'>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+<link href="static/styles/slider.css" rel="stylesheet" />
 
-            </div>
+<div class="top">
+    <div id="app" class="cntr">
+        <video width="800" height="500" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
+            @timeupdate="timeupdate">
+            <source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+        </video>
+
+        <div id="control">
+            <button class="btn" @click="play"><i :class="ic"></i></button>
+            <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
+            <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+
+            <progress value='0' max='100' class='pr' id='bar' ref="bar" @click="prg"></progress>
+            <span id='time' ref="time">
+                <span ref="currenttime">00:00</span> /
+                <span ref="duration">00:00</span>
+            </span>
+            <span id=vol @click="mouseover"><i :class="vol_ic"></i></span>
+            <input type='range' value='100' max='100' ref='volume' id='volume' v-show="active" @click='set_vol'
+                @mouseout='mouseout'>
+
         </div>
     </div>
-    <script src="static/styles/js.js"></script>
+</div>
+<script src="static/styles/js.js"></script>
 
-    <!--<script src="/vidosos/static/styles/js.js"></script>-->
+<!--<script src="/vidosos/static/styles/js.js"></script>-->
 <!--/body-->
 
 <!--</html>-->
