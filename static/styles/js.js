@@ -35,6 +35,7 @@ const vm = new Vue({
         },
 
         mouseover() {
+            console.log('lol')
             this.active = !this.active;
         },
 
