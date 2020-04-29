@@ -153,8 +153,8 @@ def add_video():
 
 @app.route('/my_videos')
 def get_user_videos():
-    #if not current_user.is_authenticated:
-        #return redirect('/non_authorization')
+    if not current_user.is_authenticated:
+        return redirect('/non_authorization')
     session = db_session.create_session()
     users_videos = session.query(Video).filter(
         (own_video_table.c.user_id == current_user.id)
@@ -166,19 +166,6 @@ def get_user_videos():
     session.commit()
     return render_template('view_videos.html', title='Мои видео',
                            videos=video_list.items())
-
-
-@app.route('/favourite_videos')
-def get_favourite_videos():
-    if not current_user.is_authenticated:
-        return redirect('/non_authorization')
-    session = db_session.create_session()
-    users_videos = session.query(Video).filter(
-        (favourite_video_table.c.user_id == current_user.id)
-        & (Video.id == favourite_video_table.c.video_id)).all()
-    session.commit()
-    return render_template('view_videos.html', title='Избранные видео',
-                           videos=users_videos)
 
 
 @app.route('/delete_my_video/<video_id>')
@@ -194,21 +181,6 @@ def delete_my_video(video_id):
         abort(404)
     session.commit()
     return redirect('/my_videos')
-
-
-@app.route('/delete_favourite_video/<video_id>')
-def delete_favourite_video(video_id):
-    if not current_user.is_authenticated:
-        return redirect('/non_authorization')
-    session = db_session.create_session()
-    video = session.query(Video).filter(Video.id == video_id).first()
-    if video:
-        session.delete(video)
-        session.commit()
-    else:
-        abort(404)
-    session.commit()
-    return redirect('/favourite_videos')
 
 
 @app.route('/logout')

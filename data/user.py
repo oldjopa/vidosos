@@ -16,8 +16,6 @@ class User(SqlAlchemyBase, UserMixin):
     email = sqlalchemy.Column(sqlalchemy.String)
     role = sqlalchemy.Integer
     own_videos = orm.relation("Video", secondary="own_video_association")
-    favourite_videos = orm.relation("Video",
-                                    secondary="favourite_video_association")
     viewed_videos = orm.relation("Video",
                                  secondary="viewed_video_association")
 

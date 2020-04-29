@@ -1,5 +1,6 @@
 import sqlalchemy
 from .db_session import SqlAlchemyBase
+from sqlalchemy import orm
 
 
 class Video(SqlAlchemyBase):
@@ -9,3 +10,6 @@ class Video(SqlAlchemyBase):
                            autoincrement=True)
     description = sqlalchemy.Column(sqlalchemy.String)
     filename = sqlalchemy.Column(sqlalchemy.String)
+    owner_id = sqlalchemy.Column(sqlalchemy.Integer,
+                                 sqlalchemy.ForeignKey('users.id'))
+    owner = orm.relation('User')
