@@ -40,8 +40,22 @@
                         <img src="{{ video[2] }}" >
                     </a>
                 </div>
-                <div class="col-6">
+                <div class="col-6 desc_row">
                     {{ video[1] }}
+                    <div class="row">
+                        <div class="col-5">
+                            <a class="btn btn-warning btn-sm other_btn font-normal"
+                               role="button" href="edit_job">
+                                Edit
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a class="btn btn-danger btn-sm other_btn font-normal"
+                               role="button" href="delete_my_video/{{ video[0] }}">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endfor %}
