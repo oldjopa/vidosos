@@ -1,35 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ title }}</h1>
+<h1 class="text-center">{{ title }}</h1>
 <link rel="stylesheet"
           href="static/styles/styles.css">
 <div class="form">
 <form action="" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
+    <p class="red">
+        {{message}}
+    </p>
 	<p>
         {{ form.description.label }}<br>
-        {{ form.description(class="form-control",
-        type="description", cols=70, rows=10) }}<br>
+        <p class="text_area">
+            {{ form.description(class="form-control",
+            type="description", cols=70, rows=10) }}<br>
+        </p>
         {% for error in form.description.errors %}
-            <p class="alert alert-danger" role="alert">
+            <p class="alert alert-danger font-normal" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
     <p>
         {{ form.file.label }}<br>
-        {{ form.file(class="form-control", type="file") }}<br>
+        <p class="font-normal">
+            {{ form.file(class="form-control", type="file") }}<br>
+        </p>
         {% for error in form.file.errors %}
-            <p class="alert alert-danger" role="alert">
+            <p class="alert alert-danger font-normal" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
-
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
-    {{message}}
+    <p>{{ form.submit(type="submit", class="btn btn-primary font-normal") }}</p>
 </form>
 </div>
 {% endblock %}

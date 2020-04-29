@@ -146,6 +146,10 @@ def add_video():
                 session.merge(user)
                 session.commit()
                 return redirect('/my_videos')
+            elif file and not allowed_file(file.filename):
+                return render_template('upload_video.html', form=form, title='Добавление видео',
+                                       message='Извините, проект поддерживает'
+                                               ' видео только в формате mp4')
 
     return render_template('upload_video.html', form=form,
                            title='Добавление видео')
