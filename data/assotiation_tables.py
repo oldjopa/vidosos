@@ -4,17 +4,22 @@ from .db_session import SqlAlchemyBase
 from werkzeug.security import *
 
 
-own_video_table = sqlalchemy.Table('own_video_association', SqlAlchemyBase.metadata,
-    sqlalchemy.Column('user_id', sqlalchemy.Integer,
-                      sqlalchemy.ForeignKey('users.id')),
-    sqlalchemy.Column('video_id', sqlalchemy.Integer,
-                      sqlalchemy.ForeignKey('videos.id'))
+own_video_table = sqlalchemy.Table(
+    'own_video_association', SqlAlchemyBase.metadata,
+    sqlalchemy.Column('user_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id')),
+    sqlalchemy.Column('video_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('videos.id'))
 )
 
 
-viewed_video_table = sqlalchemy.Table('viewed_video_association', SqlAlchemyBase.metadata,
-    sqlalchemy.Column('user_id', sqlalchemy.Integer,
-                      sqlalchemy.ForeignKey('users.id')),
-    sqlalchemy.Column('video_id', sqlalchemy.Integer,
-                      sqlalchemy.ForeignKey('videos.id'))
+viewed_video_table = sqlalchemy.Table(
+    'viewed_video_association', SqlAlchemyBase.metadata,
+    sqlalchemy.Column('user_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id')),
+    sqlalchemy.Column('video_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('videos.id'))
+)
+
+
+liked_video_table = sqlalchemy.Table(
+    'liked_video_association', SqlAlchemyBase.metadata,
+    sqlalchemy.Column('video_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('videos.id')),
+    sqlalchemy.Column('user_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
 )

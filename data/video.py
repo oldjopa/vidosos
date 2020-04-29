@@ -13,3 +13,4 @@ class Video(SqlAlchemyBase):
     owner_id = sqlalchemy.Column(sqlalchemy.Integer,
                                  sqlalchemy.ForeignKey('users.id'))
     owner = orm.relation('User')
+    number_likes = sqlalchemy.Column(sqlalchemy.Integer)
