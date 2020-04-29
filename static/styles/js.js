@@ -5,6 +5,8 @@ const vm = new Vue({
         id: ';',
         pl: false,
         ic: 'fas fa-play',
+        active: false,
+        vol_ic: 'fa fa-volume-up'
     },
     methods: {
         like() {
@@ -15,13 +17,13 @@ const vm = new Vue({
         },
         play() {
             if (this.pl) {
-                this.$refs.videoRef.pause()
-                this.pl = false
-                this.ic = 'fas fa-play'
+                this.$refs.videoRef.pause();
+                this.pl = false;
+                this.ic = 'fas fa-play';
             } else {
-                this.$refs.videoRef.play()
+                this.$refs.videoRef.play();
                 this.pl = true;
-                this.ic = 'fas fa-pause'
+                this.ic = 'fas fa-pause';
             }
 
         },
@@ -30,6 +32,24 @@ const vm = new Vue({
             progress = Math.floor(this.$refs.videoRef.currentTime) / Math.floor(this.$refs.videoRef.duration);
             this.$refs.bar.value = Math.floor(progress * 100);
 //            console.log(Math.floor(progress * 100));
+        },
+
+        mouseover() {
+            console.log('lol')
+            this.active = !this.active;
+        },
+
+        mouseout() {
+            this.active = false;
+        },
+
+        set_vol() {
+            this.$refs.videoRef.volume = this.$refs.volume.value / 100;
+            if (this.$refs.volume.value < 10){
+                this.vol_ic = 'fa fa fa-volume-down'
+            } else {
+                this.vol_ic = 'fa fa fa-volume-up'
+            }
         },
 
         prg(e) {
