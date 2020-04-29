@@ -73,8 +73,8 @@ footer{
 }
 
 .cntr{
-  margin-right: 150px;
-  margin-left: 150px;
+  margin-right: 30px;
+  margin-left: 30px;
   text-align: left;
   min-width: fit-content;
 }
@@ -105,6 +105,9 @@ footer{
     font-size: 24px;
 }
 
+video{
+    max-width:100%;
+}
 .head{
   background-color: rgb(23, 12, 87);
   text-align: center;

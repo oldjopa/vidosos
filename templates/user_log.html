@@ -8,7 +8,7 @@
 <form action="" method="post">
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
-	<p>
+	<p class="font-normal">
         {{ form.login.label }}<br>
         {{ form.login(class="form-control", type="login") }}<br>
         {% for error in form.login.errors %}
@@ -17,7 +17,7 @@
             </p>
         {% endfor %}
     </p>
-    <p>
+    <p class="font-normal">
         {{ form.password.label }}<br>
         {{ form.password(class="form-control", type="password") }}<br>
         {% for error in form.password.errors %}
@@ -27,7 +27,7 @@
         {% endfor %}
     </p>
 
-    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    <p class="font-normal">{{ form.submit(type="submit", class="btn btn-primary font-normal") }}</p>
     {{message}}
 </form>
 </div>
