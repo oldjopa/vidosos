@@ -87,24 +87,6 @@ footer{
   min-width: fit-content;
 }
 
-.red{
-    color: red !important;
-    font-size: 32px !important;
-    font-family: sans-serif !important;
-    font-weight: bold !important;
-}
-
-.text_area{
-    font-size: 24px !important;
-    color: black !important;
-    font-family: sans-serif !important;
-}
-
-.font-normal{
-    font-family: sans-serif !important;
-    font-size: 24px;
-}
-
 .head{
   background-color: rgb(23, 12, 87);
   text-align: center;
@@ -123,7 +105,7 @@ footer{
   fill:#333;
   padding:0 5px;
 }
-          
+
 #dynamic.off {
   fill:#ccc;
 }
@@ -144,7 +126,7 @@ footer{
 
 progress {
   vertical-align	: middle;
-  border-radius: 2px; 
+  border-radius: 2px;
   width: 100%;
   height: 22px;
   margin-top: auto;
@@ -155,12 +137,12 @@ progress::-webkit-progress-bar {
 }
 progress::-webkit-progress-value {
   background-color: rgb(96, 9, 122);
-   border-radius: 2px; 
+   border-radius: 2px;
 }
 
 #control {
 vertical-align	: middle;
-margin-top: -23px;
-top:-10px; 
+margin-top: 0px;
+top:0px;
 bottom:0px;
 }

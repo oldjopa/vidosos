@@ -22,7 +22,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static\\video')
-ALLOWED_EXTENSIONS = ["mp4"]
+ALLOWED_EXTENSIONS = ["mp4", 'MP4']
 
 login_manager = LoginManager()
 login_manager.init_app(app)
