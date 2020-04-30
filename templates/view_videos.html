@@ -36,25 +36,19 @@
         {% for video in videos %}
             <div class="row my_videos-row" >
                 <div class="col-6 text-center">
-                    <a href="{{ video[0]}}">
-                        <img src="{{ video[2] }}" >
+                    <a href="/my_videos/{{ video[0]}}">
+                        <img src="../{{ video[2] }}" >
                     </a>
                 </div>
                 <div class="col-6 desc_row">
-                    {{ video[1] }}
+                    <a href="/my_videos/{{ video[0]}}">
+                        {{ video[1] }}
+                    </a>
                     <div class="row">
-                        <div class="col-5">
-                            <a class="btn btn-warning btn-sm other_btn font-normal"
-                               role="button" href="edit_job">
-                                Edit
-                            </a>
-                        </div>
-                        <div class="col-7">
-                            <a class="btn btn-danger btn-sm other_btn font-normal"
-                               role="button" href="delete_my_video/{{ video[0] }}">
-                                Delete
-                            </a>
-                        </div>
+                        <a class="btn btn-danger btn-sm other_btn font-normal"
+                           role="button" href="/delete_my_video/{{ video[0] }}">
+                            Delete
+                        </a>
                     </div>
                 </div>
             </div>

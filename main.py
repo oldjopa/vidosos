@@ -48,7 +48,10 @@ def index():
     user = session.query(User).filter(User.id == current_user.id).first()
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
-        return redirect('/no_videos')
+        return render_template('abnormal_situation.html',
+                               message='К сожалению, видео для просмотра закончились,'
+                                       ' но не переживайте, скоро обязательно появятся'
+                                       ' новые.')
     random_video = random.choice(list(possible_videos))
     user.viewed_videos.append(random_video)
     session.merge(user)
@@ -60,12 +63,8 @@ def index():
 
 @app.route('/non_authorization')
 def non_authorization():
-    return render_template('non_authorization.html')
-
-
-@app.route('/no_videos')
-def no_videos():
-    return render_template('no_videos.html')
+    return render_template('abnormal_situation.html',
+                           message='Вы не авторизованы. Зарегистрируйтесь или войдите в систему.')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -142,6 +141,8 @@ def add_video():
                 )
                 user = session.query(User).filter(User.id == current_user.id).first()
                 user.own_videos.append(video)
+                video.owner = user
+                video.owner_id = user.id
                 session.add(video)
                 session.merge(user)
                 session.commit()
@@ -164,10 +165,14 @@ def get_user_videos(video_id=None):
     users_videos = session.query(Video).filter(
         (own_video_table.c.user_id == user.id)
         & (Video.id == own_video_table.c.video_id)).all()
+    if not users_videos:
+        return render_template('abnormal_situation.html',
+                               message='Пока что у вас нет видео. Добавьте их скорее!')
     try:
         video = user.own_videos[int(video_id)]
     except Exception:
-        return 'Видео не найдено'
+        return render_template('abnormal_situation.html',
+                               message='Видео не найдено')
     src = f'../static/video/{video.filename}'
     video_list = list()
     for i, video in enumerate(users_videos):
@@ -178,26 +183,27 @@ def get_user_videos(video_id=None):
                            videos=video_list)
 
 
-@app.route('edit_video/<video_id>')
-def edit_video(video_id):
-    pass
-
-
 @app.route('/delete_my_video/<video_id>')
 def delete_my_video(video_id):
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
     session = db_session.create_session()
-    video = session.query(Video).filter(Video.id == video_id).first()
-    user = video.owner
+    user = session.query(User).filter(User.id == current_user.id).first()
+    print(user.own_videos)
+    video = user.own_videos[int(video_id)]
+    print(video.owner)
+    owner = video.owner
+    if owner.id != user.id:
+        return render_template('abnormal_situation.html',
+                               message='У вас недостаточно прав, чтобы удалять это видео')
     if video:
-        user.own_videos.remove(video)
+        owner.own_videos.remove(video)
         session.delete(video)
         session.commit()
     else:
         abort(404)
     session.commit()
-    return redirect('/my_videos')
+    return redirect('/my_videos/0')
 
 
 @app.route('/logout')
