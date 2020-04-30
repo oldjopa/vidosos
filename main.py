@@ -145,7 +145,7 @@ def add_video():
                 session.add(video)
                 session.merge(user)
                 session.commit()
-                return redirect('/my_videos')
+                return redirect('/my_videos/0')
             elif file and not allowed_file(file.filename):
                 return render_template('upload_video.html', form=form, title='Добавление видео',
                                        message='Извините, проект поддерживает'
@@ -155,21 +155,32 @@ def add_video():
                            title='Добавление видео')
 
 
-@app.route('/my_videos')
-def get_user_videos():
+@app.route('/my_videos/<video_id>', methods=['GET'])
+def get_user_videos(video_id=None):
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
     session = db_session.create_session()
+    user = session.query(User).filter(User.id == current_user.id).first()
     users_videos = session.query(Video).filter(
-        (own_video_table.c.user_id == current_user.id)
+        (own_video_table.c.user_id == user.id)
         & (Video.id == own_video_table.c.video_id)).all()
-    video_list = {}
-    for video in users_videos:
-        name = 'static/video/' + video.filename[:-4] + '.png'
-        video_list[video.description] = name
+    try:
+        video = user.own_videos[int(video_id)]
+    except Exception:
+        return 'Видео не найдено'
+    src = f'../static/video/{video.filename}'
+    video_list = list()
+    for i, video in enumerate(users_videos):
+        name = '../static/video/' + video.filename[:-4] + '.png'
+        video_list.append((i, video.description, name))
     session.commit()
-    return render_template('view_videos.html', title='Мои видео',
-                           videos=video_list.items())
+    return render_template('view_videos.html', src=src, title='Мои видео',
+                           videos=video_list)
+
+
+@app.route('edit_video/<video_id>')
+def edit_video(video_id):
+    pass
 
 
 @app.route('/delete_my_video/<video_id>')
@@ -178,7 +189,9 @@ def delete_my_video(video_id):
         return redirect('/non_authorization')
     session = db_session.create_session()
     video = session.query(Video).filter(Video.id == video_id).first()
+    user = video.owner
     if video:
+        user.own_videos.remove(video)
         session.delete(video)
         session.commit()
     else:

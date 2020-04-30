@@ -1,15 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link href="../static/styles/slider.css" rel="stylesheet" />
 <h1 class="text-center">{{ title }}</h1>
-{% for video in videos %}
-<div class="row my_videos-row" >
-    <div class="col-6 col-sm-4 col-md-5 text-center">
-        <a href=""><img src="{{ video[1] }}" ></a>
+<div class="row">
+    <div class="col-12 col-sm-8">
+        <div class="top">
+            <div id="app" class="cntr text-center">
+                <video width="800" height="500" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
+                    @timeupdate="timeupdate">
+                    <source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+                </video>
+
+                <div id="control">
+                    <button class="btn" @click="play"><i :class="ic"></i></button>
+                    <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
+                    <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+
+                    <progress value='0' max='100' class='pr' id='bar' ref="bar" @click="prg"></progress>
+                    <span id='time' ref="time">
+                        <span ref="currenttime">00:00</span> /
+                        <span ref="duration">00:00</span>
+                    </span>
+                    <span id=vol @click="mouseover"><i :class="vol_ic"></i></span>
+                    <input type='range' value='100' max='100' ref='volume' id='volume' v-show="active" @click='set_vol'
+                        @mouseout='mouseout'>
+                </div>
+            </div>
+        </div>
+        <script src="../static/styles/js.js"></script>
     </div>
-    <div class="col-6 col-sm-8 col-md-7">
-        {{ video[0] }}
+    <div class="col-12 col-sm-4">
+        {% for video in videos %}
+            <div class="row my_videos-row" >
+                <div class="col-6 text-center">
+                    <a href="{{ video[0]}}">
+                        <img src="{{ video[2] }}" >
+                    </a>
+                </div>
+                <div class="col-6 desc_row">
+                    {{ video[1] }}
+                    <div class="row">
+                        <div class="col-5">
+                            <a class="btn btn-warning btn-sm other_btn font-normal"
+                               role="button" href="edit_job">
+                                Edit
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <a class="btn btn-danger btn-sm other_btn font-normal"
+                               role="button" href="delete_my_video/{{ video[0] }}">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 </div>
-{% endfor %}
 {% endblock %}
