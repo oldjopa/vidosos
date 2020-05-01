@@ -18,6 +18,7 @@
     <nav class="navbar navbar-light">
         <a class="text-1" href="/">VIDOSOS - the best video base</a>
         {% if current_user.is_authenticated %}
+        <a class="btn btn-success" href="/add_video">Add Video</a>
         <a class="navbar-brand navbar-username" href="/my_videos/0">{{ current_user.login }}</a>
         <a class="btn btn-success" href="/logout">Log out</a>
         {% else %}

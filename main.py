@@ -36,7 +36,7 @@ def load_user(user_id):
     return session.query(User).get(user_id)
 
 
-import random   # убрать потом
+import random  # убрать потом
 
 
 @app.route('/')
@@ -56,8 +56,9 @@ def index():
     session.merge(user)
     session.commit()
     src = f'/static/video/{random_video.filename}'
-    vidosos_api.set_video_id(random_video.id)    # скармливаем апи id видео
-    return render_template("index.html", src=src)
+    vidosos_api.set_video_id(random_video.id)  # скармливаем апи id видео
+    return render_template("index.html", src=src, description=random_video.description,
+                           like_number=len(random_video.liked_users))
 
 
 @app.route('/non_authorization')
@@ -136,7 +137,9 @@ def add_video():
                 session = db_session.create_session()
                 video = Video(
                     description=form.description.data,
-                    filename=filename
+                    filename=filename,
+                    owner_id=current_user.id,
+                    # number_likes=0
                 )
                 user = session.query(User).filter(User.id == current_user.id).first()
                 user.own_videos.append(video)
@@ -184,14 +187,18 @@ def get_user_videos(video_id=None):
                            videos=video_list)
 
 
+@app.route('edit_video/<video_id>')
+def edit_video(video_id):
+    pass
+
+
 @app.route('/delete_my_video/<video_id>')
 def delete_my_video(video_id):
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
     session = db_session.create_session()
-    user = session.query(User).filter(User.id == current_user.id).first()
-    print(user.own_videos)
-    video = user.own_videos[int(video_id)]
+    video = session.query(Video).filter(Video.id == video_id).first()
+    user = video.owner
     if video:
         user.own_videos.remove(video)
         session.delete(video)
