@@ -48,7 +48,9 @@ def index():
     user = session.query(User).filter(User.id == current_user.id).first()
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
-        return redirect('/no_videos')
+        return render_template('abnormal_situation.html',
+                               message="Unfortunately, there are no more videos to watch,"
+                                       " but don't worry, there will be new ones soon.")
     random_video = random.choice(list(possible_videos))
     user.viewed_videos.append(random_video)
     session.merge(user)
@@ -61,12 +63,8 @@ def index():
 
 @app.route('/non_authorization')
 def non_authorization():
-    return render_template('non_authorization.html')
-
-
-@app.route('/no_videos')
-def no_videos():
-    return render_template('no_videos.html')
+    return render_template('abnormal_situation.html',
+                           message="You are not logged in. Register or log in.")
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -74,14 +72,14 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
-            return render_template('user_reg.html', title='Регистрация',
+            return render_template('user_reg.html', title='Registration',
                                    form=form,
-                                   message="Пароли не совпадают")
+                                   message="Passwords are not the same")
         session = db_session.create_session()
         if session.query(User).filter(User.login == form.login.data).first():
-            return render_template('user_reg.html', title='Регистрация',
+            return render_template('user_reg.html', title='Registration',
                                    form=form,
-                                   message="Такой пользователь уже есть")
+                                   message="This user already exists")
         user = User(
             login=form.login.data,
             age=form.age.data,
@@ -92,7 +90,7 @@ def register():
         session.add(user)
         session.commit()
         return redirect('/login')
-    return render_template('user_reg.html', title='Регистрация', form=form)
+    return render_template('user_reg.html', title='Registration', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -105,10 +103,10 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
-        return render_template('user_log.html', title='Авторизация',
-                               message="Неправильный логин или пароль",
+        return render_template('user_log.html', title='Authorization',
+                               message="Wrong login or password",
                                form=form)
-    return render_template('user_log.html', title='Авторизация', form=form)
+    return render_template('user_log.html', title='Authorization', form=form)
 
 
 @app.route('/profile')
@@ -145,17 +143,18 @@ def add_video():
                 )
                 user = session.query(User).filter(User.id == current_user.id).first()
                 user.own_videos.append(video)
+                video.owner = user
+                video.owner_id = user.id
                 session.add(video)
                 session.merge(user)
                 session.commit()
                 return redirect('/my_videos/0')
             elif file and not allowed_file(file.filename):
-                return render_template('upload_video.html', form=form, title='Добавление видео',
-                                       message='Извините, проект поддерживает'
-                                               ' видео только в формате mp4')
+                return render_template('upload_video.html', form=form, title='Uploading video',
+                                       message="Sorry, the project only supports videos in mp4 format")
 
     return render_template('upload_video.html', form=form,
-                           title='Добавление видео')
+                           title='Uploading video')
 
 
 @app.route('/my_videos/<video_id>', methods=['GET'])
@@ -167,23 +166,25 @@ def get_user_videos(video_id=None):
     users_videos = session.query(Video).filter(
         (own_video_table.c.user_id == user.id)
         & (Video.id == own_video_table.c.video_id)).all()
+    if not users_videos:
+        return render_template('abnormal_situation.html',
+                               message="You don't have a video yet. Add them soon!")
     try:
         video = user.own_videos[int(video_id)]
     except Exception:
-        return 'Видео не найдено'
+        return render_template('abnormal_situation.html',
+                               message='Video not found')
     src = f'../static/video/{video.filename}'
     video_list = list()
     for i, video in enumerate(users_videos):
         name = '../static/video/' + video.filename[:-4] + '.png'
-        video_list.append((i, video.description, name))
+        desc = video.description
+        if len(desc) > 60:
+            desc = desc[:57] + '...'
+        video_list.append((i, desc, name))
     session.commit()
-    return render_template('view_videos.html', src=src, title='Мои видео',
+    return render_template('view_videos.html', src=src, title='My videos',
                            videos=video_list)
-
-
-@app.route('/edit_video/<video_id>')
-def edit_video(video_id):
-    pass
 
 
 @app.route('/delete_my_video/<video_id>')
@@ -191,16 +192,16 @@ def delete_my_video(video_id):
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
     session = db_session.create_session()
-    video = session.query(Video).filter(Video.id == video_id).first()
-    user = video.owner
+    user = session.query(User).filter(User.id == current_user.id).first()
+    video = user.own_videos[int(video_id)]
     if video:
         user.own_videos.remove(video)
         session.delete(video)
         session.commit()
     else:
-        abort(404)
+        return render_template('abnormal_situation.html', message="Video not found.")
     session.commit()
-    return redirect('/my_videos')
+    return redirect('/my_videos/0')
 
 
 @app.route('/logout')

@@ -94,6 +94,13 @@ footer{
     font-weight: bold !important;
 }
 
+.word{
+    font-size: 18px;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
 .text_area{
     font-size: 24px !important;
     color: black !important;
