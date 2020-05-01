@@ -187,11 +187,6 @@ def get_user_videos(video_id=None):
                            videos=video_list)
 
 
-@app.route('edit_video/<video_id>')
-def edit_video(video_id):
-    pass
-
-
 @app.route('/delete_my_video/<video_id>')
 def delete_my_video(video_id):
     if not current_user.is_authenticated:
