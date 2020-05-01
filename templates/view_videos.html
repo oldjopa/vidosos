@@ -6,7 +6,7 @@
 <link href="../static/styles/slider.css" rel="stylesheet" />
 <h1 class="text-center">{{ title }}</h1>
 <div class="row">
-    <div class="col-12 col-sm-8">
+    <div class="col-12 col-sm-7">
         <div class="top">
             <div id="app" class="cntr text-center">
                 <video width="800" height="500" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
@@ -32,7 +32,7 @@
         </div>
         <script src="../static/styles/js.js"></script>
     </div>
-    <div class="col-12 col-sm-4">
+    <div class="col-12 col-sm-5">
         {% for video in videos %}
             <div class="row my_videos-row" >
                 <div class="col-6 text-center">
@@ -41,9 +41,7 @@
                     </a>
                 </div>
                 <div class="col-6 desc_row">
-                    <a href="/my_videos/{{ video[0]}}">
-                        {{ video[1] }}
-                    </a>
+                    <p class="word">{{ video[1] }}</p>
                     <div class="row">
                         <a class="btn btn-danger btn-sm other_btn font-normal"
                            role="button" href="/delete_my_video/{{ video[0] }}">
