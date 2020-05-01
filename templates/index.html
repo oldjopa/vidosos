@@ -12,10 +12,11 @@
     </head>
 
 <body-->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <link href="static/styles/slider.css" rel="stylesheet" />
 
 <div class="top">
@@ -39,18 +40,18 @@
             <span id=vol @click="mouseover"><i :class="vol_ic"></i></span>
             <input type='range' value='100' max='100' ref='volume' id='volume' v-show="active" @click='set_vol'
                 @mouseout='mouseout'>
-            </div>
         </div>
-        <div class='info'>
-            <span id='likes'>{{ like_number }}<i class="fa fa-thumbs-up"></i></span>
-            <span id='desc'>
+        <div class='description'>
+            <span id='likes' ref='likes'>   {{ like_number }}</span> <i class="fa fa-thumbs-up"></i>
+            <br><br>
+            <span id='desc' class='word'>
                 {{ description }}
             </span>
         </div>
     </div>
 </div>
 <script src="static/styles/js.js"></script>
-
+</div>
 <!--<script src="/vidosos/static/styles/js.js"></script>-->
 <!--/body-->
 

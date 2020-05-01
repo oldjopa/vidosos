@@ -30,8 +30,12 @@ def get_jobs():
             session = db_session.create_session()
             users = session.query(User.id).filter(
                 (liked_video_table.c.video_id == v_id) & (User.id == liked_video_table.c.user_id)).all()
-            if u_id in users:
-                # dislike
+            a = list([i[0] for i in users])
+            if int(u_id) in a:
+                video = session.query(Video).filter(Video.id == v_id).first()
+                video.liked_users.remove(session.query(User).filter(User.id == u_id).first())
+                session.merge(video)
+                session.commit()
                 return jsonify({'error': 'alresdy_liked'})
             else:
                 video = session.query(Video).filter(Video.id == v_id).first()
@@ -41,6 +45,6 @@ def get_jobs():
                 return jsonify({'ok': 'ok'})
         except Exception as e:
             print(e)
-            return 'lol'
+            return jsonify({'error': 'server error'})
     else:
         return jsonify({'error': '306'})

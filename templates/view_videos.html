@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link href="../static/styles/slider.css" rel="stylesheet" />
 <h1 class="text-center">{{ title }} <a class="btn btn-success" href="/">Back</a></h1>
 <div class="row">
     <div class="col-12 col-sm-8">
         <div class="top">
-            <div id="app" class="cntr text-center">
+            <div id="app" class="cntr">
                 <video width="100%" height="90%" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
                     @timeupdate="timeupdate">
                     <source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
@@ -16,10 +16,10 @@
 
                 <div id="control">
                     <button class="btn" @click="play"><i :class="ic"></i></button>
-                    <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
-                    <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+                    <!-- <a class="btn" href="/"><i class="fas fa-step-forward"></i></a> -->
+                    <!-- <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button> -->
 
-                    <progress value='0' max='100' class='pr' id='bar' ref="bar" @click="prg"></progress>
+                    <progress value='0' max='100' class='pr' id='bar_w' ref="bar" @click="prg"></progress>
                     <span id='time' ref="time">
                         <span ref="currenttime">00:00</span> /
                         <span ref="duration">00:00</span>
