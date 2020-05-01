@@ -192,8 +192,8 @@ def delete_my_video(video_id):
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
     session = db_session.create_session()
-    video = session.query(Video).filter(Video.id == video_id).first()
-    user = video.owner
+    user = session.query(User).filter(User.id == current_user.id).first()
+    video = user.own_videos[int(video_id)]
     if video:
         user.own_videos.remove(video)
         session.delete(video)
