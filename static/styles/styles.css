@@ -52,7 +52,7 @@ footer{
 
 .form {
       font-family: sans-serif;
-      font-size: 20px;
+      font-size: 26px;
       color: rgb(163, 10, 180);
       margin-right: 150px;
       margin-left: 150px;
@@ -117,9 +117,8 @@ footer{
     height: 100%;
 }
 
-.font-normal{
-    font-family: sans-serif !important;
-    font-size: 24px;
+form. h1 {
+    font-family: 'FontName'
 }
 
 video{
