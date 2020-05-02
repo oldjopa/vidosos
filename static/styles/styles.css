@@ -17,7 +17,7 @@ body{
 	src: url(Neoneon1.otf); 
 }
 .container[role=main]{
-    background: rgb(13, 0, 43);
+    background: rgb(13, 0, 43, 0.4);
     color: #fff;
     margin-top:60px;
     padding: 30px 0 100px
@@ -44,23 +44,28 @@ footer{
     max-height: 200%;
 }
 .text-1 {
-	font-family: 'FontName'; 
-  font-size: 50px;
-  color: rgb(163, 10, 180);
+    font-family: 'FontName';
+    font-size: 50px;
+    color: rgb(163, 10, 180);
+    margin-top: 10px;
 }
 
 .form {
-  font-family: 'FontName';
-  font-size: 20px;
-  color: rgb(163, 10, 180);
-  margin-right: 150px;
-  margin-left: 150px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  background-color: rgb(13, 0, 43);
-  text-align: center;
-  height: fit-content;
-  min-width: fit-content;
+      font-family: sans-serif;
+      font-size: 20px;
+      color: rgb(163, 10, 180);
+      margin-right: 150px;
+      margin-left: 150px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      text-align: center;
+      height: fit-content;
+      min-width: fit-content;
+}
+
+.form-control {
+    font-size: inherit;
+
 }
 
 .btn {
@@ -88,7 +93,7 @@ footer{
 }
 
 .red{
-    color: red !important;
+    color: rgb(255, 20, 40) !important;
     font-size: 32px !important;
     font-family: sans-serif !important;
     font-weight: bold !important;
@@ -130,9 +135,6 @@ video{
 }
 .navbar-brand.navbar-username{
     color: #fff;
-}
-.btn:hover {
-    background-color: RoyalBlue;
 }
 
 #dynamic {
@@ -196,4 +198,31 @@ bottom:0px;
   margin-top: 10px;
   background-color: rgb(38, 8, 48);
   height: 300px;
+}
+
+.buttons {
+  width: 150px;
+  text-decoration: none;
+  color: #a675b3;
+  text-align: center;
+  line-height: 20px;
+  display: block;
+  margin: 5px auto;
+  font: normal 28px sans-serif;
+}
+
+a.buttons:not(.active) {
+  box-shadow: inset 0 1px 1px rgba(111, 55, 125, 0.8), inset 0 -1px 0px rgba(63, 59, 113, 0.2), 0 9px 16px 0 rgba(0, 0, 0, 0.3), 0 4px 3px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px #150a1e;
+  background-image: linear-gradient(#3b2751, #271739);
+  text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 -1px 0 #311d47;
+}
+
+a.buttons:not(.active):hover,
+a.buttons:not(.active):focus {
+  transition: color 200ms linear, text-shadow 500ms linear;
+  color: #fff;
+  text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 0 10px rgba(223, 206, 228, 0.4), 0 0 2px #2a153c;
+}
+a.buttons:not(:hover) {
+    transition: 0.6s;
 }

@@ -81,9 +81,9 @@ def register():
                                    form=form,
                                    message="This user already exists")
         user = User(
+            name=form.name.data,
             login=form.login.data,
             age=form.age.data,
-            gender=form.gender.data,
             email=form.email.data
         )
         user.set_password(form.password.data)
@@ -212,6 +212,12 @@ def logout():
     logout_user()
     vidosos_api.set_user_id(-1)
     return redirect("/")
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('abnormal_situation.html',
+                           message='''404 There is not the web page you are looking for''')
 
 
 def main():

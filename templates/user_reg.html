@@ -8,19 +8,40 @@
 <form action="" method="post">
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
-	<p class="font-normal">
-        {{ form.login.label }}<br>
-        {{ form.login(class="form-control", type="login") }}<br>
-        {% for error in form.login.errors %}
+    <p class="red">
+        {{message}}
+    </p>
+    <p class="font-normal">
+        {{ form.name.label }}<br>
+        {{ form.name(class="form-control") }}<br>
+        {% for error in form.name.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
         {% endfor %}
     </p>
     <p class="font-normal">
+        {{ form.age.label }}<br>
+        {{ form.age(class="form-control", type="login") }}<br>
+        {% for error in form.age.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+        <p class="font-normal">
         {{ form.email.label }}<br>
         {{ form.email(class="form-control", type="email") }}<br>
         {% for error in form.email.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+	<p class="font-normal">
+        {{ form.login.label }}<br>
+        {{ form.login(class="form-control", type="login") }}<br>
+        {% for error in form.login.errors %}
             <p class="alert alert-danger" role="alert">
                 {{ error }}
             </p>
@@ -44,26 +65,7 @@
             </p>
         {% endfor %}
     </p>
-    <p class="font-normal">
-        {{ form.gender.label }}<br>
-        {{ form.gender(class="form-control") }}<br>
-        {% for error in form.gender.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p class="font-normal">
-        {{ form.age.label }}<br>
-        {{ form.age(class="form-control") }}<br>
-        {% for error in form.age.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p class="font-normal">{{ form.submit(type="submit", class="btn btn-primary font-normal") }}</p>
-    {{message}}
+    <p class="font-normal buttons">{{ form.submit(type="submit", class="buttons") }}</p>
 </form>
 </div>
 {% endblock %}
