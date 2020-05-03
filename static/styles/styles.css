@@ -247,13 +247,7 @@ body{
 .buttons-row{
     margin-top: 120px;
 }
-.rainbow{
-    text-decoration: none !important;
-    font-size: 34px;
-    color: #fff;
-    cursor: pointer;
-    font-weight: 500;
-}
+
 .rainbow-3:hover{
       background-image: linear-gradient(to right, #e400e4, #960081, #2e0097, #000075, #2e0097,#960081, #e400e4);
       animation: slidebg 2s linear infinite;
@@ -264,13 +258,17 @@ body{
   }
 }
 a.rainbow {
-    border: 4px solid #e400e4;
+    outline: 4px solid #e400e4;
     padding: 20px 48px;
+    text-decoration: none;
+    font-size: 34px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
 }
 a.rainbow:hover,
 a.rainbow:focus,
-a.rainbow:active,
-a.rainbow:link {
-    border: none;
+a.rainbow:active{
+    outline: none;
     color: #fff !important;
 }
