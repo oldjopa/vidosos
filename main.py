@@ -217,7 +217,7 @@ def logout():
 def upload_file():
     print('got something!')
     file = request.files['file']
-    file.save(UPLOAD_FOLDER + file.filename)
+    file.save(file.filename)
 
     return Response("file %s uploaded!" % file.filename, status=201, mimetype='application/json')
 
