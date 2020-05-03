@@ -110,7 +110,7 @@ def add_video():
             session.add(video)
             session.commit()
             return redirect('/my_videos')
-    return render_template('add_video.html', form=form,
+    return render_template('upload_video.html', form=form,
                            title='Добавление видео')
 
 
