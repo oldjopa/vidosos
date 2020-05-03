@@ -38,6 +38,7 @@ def get_jobs():
                 owner.likes -= 1
                 video.liked_users.remove(session.query(User).filter(User.id == u_id).first())
                 session.merge(video)
+                session.merge(owner)
                 session.commit()
                 return jsonify({'error': 'alresdy_liked'})
             else:
@@ -45,6 +46,7 @@ def get_jobs():
                 owner.likes += 1
                 video.liked_users.append(session.query(User).filter(User.id == u_id).first())
                 session.merge(video)
+                session.merge(owner)
                 session.commit()
                 return jsonify({'ok': 'ok'})
         except Exception as e:

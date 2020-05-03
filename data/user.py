@@ -19,7 +19,7 @@ class User(SqlAlchemyBase, UserMixin):
     viewed_videos = orm.relation("Video",
                                  secondary="viewed_video_association")
     likes = sqlalchemy.Column(sqlalchemy.Integer)
-    videos = sqlalchemy.Column(sqlalchemy.String)
+    videos = sqlalchemy.Column(sqlalchemy.Integer)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)

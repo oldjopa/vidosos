@@ -46,8 +46,6 @@ def index():
     session = db_session.create_session()
     all_videos = set(session.query(Video).all())
     user = session.query(User).filter(User.id == current_user.id).first()
-    print(user.videos)
-    print(user.likes)
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
         return render_template('abnormal_situation.html',
@@ -172,7 +170,7 @@ def get_user_videos(video_id=None):
         & (Video.id == own_video_table.c.video_id)).all()
     if not users_videos:
         return render_template('abnormal_situation.html',
-                               message=f"{user.username}, now you may share your videos with the world. Add them soon!")
+                               message=f"{user.name}, now you may share your videos with the world. Add them soon!")
     try:
         video = user.own_videos[int(video_id)]
     except Exception:

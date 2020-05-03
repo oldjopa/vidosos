@@ -26,18 +26,23 @@
             <ul class="navbar-nav mr-auto">
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="boot" href="/my_videos/0">{{ current_user.login }}</a>
-                </li>
-                <li class="nav-item">
                     <a class="buttons" href="/add_video">Add Video</a>
                 </li>
                 <li class="nav-item">
                     <a class="buttons" href="/logout">Log out</a>
                 </li>
+                <li class="nav-item">
+                    <a class="buttons" href="/my_videos/0">My videos</a>
+                </li>
+                <li class="nav-item likes_videos">
+                    {{current_user.login}}
+                </li>
 
-
-                <li>
-                    <span>{{current_user.likes}} likes</span><span>{{current_user.videos}} videos</span>
+                <li class="nav-item likes_videos">
+                    <span>{{current_user.likes}} <i class="fa fa-heart"></i></span>
+                </li>
+                <li class="nav-item likes_videos">
+                    <span>{{current_user.videos}} <i class="fa fa-video-camera"></i></span>
                 </li>
 
 

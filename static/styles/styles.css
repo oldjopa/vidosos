@@ -59,6 +59,10 @@ h1{
     font-size:26px;
 }
 
+.likes_videos{
+    font-size: 32px;
+    color: #e400e4
+}
 .form {
       font-family: sans-serif;
       font-size: 26px;
@@ -260,6 +264,8 @@ a.buttons:not(:hover) {
 .non_auth_buttons-row a{
     margin: 0 20px 0 0;
 }
+
+.abnormal_buttons-row а::first-child {margin-right:20px;}
 
 a.rainbow {
     outline: 4px solid #e400e4;
