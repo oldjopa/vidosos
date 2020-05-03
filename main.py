@@ -46,6 +46,8 @@ def index():
     session = db_session.create_session()
     all_videos = set(session.query(Video).all())
     user = session.query(User).filter(User.id == current_user.id).first()
+    print(user.videos)
+    print(user.likes)
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
         return render_template('abnormal_situation.html',
@@ -83,7 +85,9 @@ def register():
             name=form.name.data,
             login=form.login.data,
             age=form.age.data,
-            email=form.email.data
+            email=form.email.data,
+            likes=0,
+            videos=0
         )
         user.set_password(form.password.data)
         session.add(user)
@@ -138,10 +142,11 @@ def add_video():
                     description=form.description.data,
                     filename=filename,
                     owner_id=current_user.id,
-                    # number_likes=0
+                    number_likes=0
                 )
                 user = session.query(User).filter(User.id == current_user.id).first()
                 user.own_videos.append(video)
+                user.videos += 1
                 video.owner = user
                 video.owner_id = user.id
                 session.add(video)
@@ -194,6 +199,8 @@ def delete_my_video(video_id):
     user = session.query(User).filter(User.id == current_user.id).first()
     video = user.own_videos[int(video_id)]
     if video:
+        user.likes -= video.number_likes
+        user.videos -= 1
         user.own_videos.remove(video)
         session.delete(video)
         session.commit()

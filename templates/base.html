@@ -34,6 +34,16 @@
                 <li class="nav-item">
                     <a class="buttons" href="/logout">Log out</a>
                 </li>
+
+
+
+                <!--НЕ ЗНАЮ КАК ЭТО НАПИСАТЬ ПРАВИЛЬНО-->
+                <li>
+                    <span>{{current_user.likes}} likes</span><span>{{current_user.videos}} videos</span>
+                </li>
+
+
+
             {% else %}
                 <li class="nav-item">
                     <a class="buttons" href="/register">Register</a>

@@ -31,14 +31,18 @@ def get_jobs():
             users = session.query(User.id).filter(
                 (liked_video_table.c.video_id == v_id) & (User.id == liked_video_table.c.user_id)).all()
             a = list([i[0] for i in users])
+            video = session.query(Video).filter(Video.id == v_id).first()
+            owner = video.owner
             if int(u_id) in a:
-                video = session.query(Video).filter(Video.id == v_id).first()
+                video.number_likes -= 1
+                owner.likes -= 1
                 video.liked_users.remove(session.query(User).filter(User.id == u_id).first())
                 session.merge(video)
                 session.commit()
                 return jsonify({'error': 'alresdy_liked'})
             else:
-                video = session.query(Video).filter(Video.id == v_id).first()
+                video.number_likes += 1
+                owner.likes += 1
                 video.liked_users.append(session.query(User).filter(User.id == u_id).first())
                 session.merge(video)
                 session.commit()
