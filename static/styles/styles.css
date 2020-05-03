@@ -260,6 +260,7 @@ body{
 a.rainbow {
     outline: 4px solid #e400e4;
     padding: 20px 48px;
+    margin-bottom: 120px;
     text-decoration: none;
     font-size: 34px;
     color: #fff;

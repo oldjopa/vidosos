@@ -49,7 +49,7 @@ def index():
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
         return render_template('abnormal_situation.html',
-                               message="Unfortunately, there are no more videos to watch,"
+                               message=f"{user.name}, unfortunately there are no more videos to watch,"
                                        " but don't worry, there will be new ones soon.")
     random_video = random.choice(list(possible_videos))
     user.viewed_videos.append(random_video)
@@ -63,8 +63,7 @@ def index():
 
 @app.route('/non_authorization')
 def non_authorization():
-    return render_template('abnormal_situation.html',
-                           message="You are not logged in. Register or log in.")
+    return render_template('non_authorization.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -168,7 +167,7 @@ def get_user_videos(video_id=None):
         & (Video.id == own_video_table.c.video_id)).all()
     if not users_videos:
         return render_template('abnormal_situation.html',
-                               message="You don't have a video yet. Add them soon!")
+                               message=f"{user.username}, now you may share your videos with the world. Add them soon!")
     try:
         video = user.own_videos[int(video_id)]
     except Exception:
