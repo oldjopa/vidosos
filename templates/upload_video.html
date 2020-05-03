@@ -1,40 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="text-center">{{ title }} <a class="btn btn-success" href="/">Back</a></h1>
-<link rel="stylesheet"
-          href="static/styles/styles.css">
-<div class="form">
-<form action="" method="post" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    {{ form.csrf_token }}
-    <p class="red">
-        {{message}}
-    </p>
-	<p>
-        {{ form.description.label }}<br>
-        <p class="text_area">
-            {{ form.description(class="form-control",
-            type="description", cols=70, rows=10) }}<br>
-        </p>
-        {% for error in form.description.errors %}
-            <p class="alert alert-danger font-normal" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.file.label }}<br>
-        <p class="font-normal">
-            {{ form.file(class="form-control", type="file") }}<br>
-        </p>
-        {% for error in form.file.errors %}
-            <p class="alert alert-danger font-normal" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary font-normal") }}</p>
+<script>
+    function onSubmit() {
+        const file = document.getElementById("file").files[0];
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const ajax = new XMLHttpRequest();
+
+        ajax.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 201) {
+                console.log(this.responseText);
+                alert(this.responseText);
+            }
+        };
+
+        const progress = document.getElementById("progress");
+        ajax.upload.onprogress = function (event) {
+            console.log(event.total, event.loaded);
+            progress.max = event.total;
+            progress.value = event.loaded;
+        };
+
+        ajax.open("POST", "file_upload_url", true);
+        ajax.send(formData);
+        return false;
+    }
+</script>
+<body>
+<form id='form-id' method="POST" enctype="multipart/form-data" onsubmit="return onSubmit();">
+    <input type="file" name="file" id="file"/>
+    <input type="submit" name="submit"/>
 </form>
-</div>
+<progress id="progress" value="0"/>
+</body>
 {% endblock %}

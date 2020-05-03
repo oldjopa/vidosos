@@ -213,6 +213,13 @@ def logout():
     vidosos_api.set_user_id(-1)
     return redirect("/")
 
+@app.route('/file_upload_url', methods=['POST'])
+def upload_file():
+    print('got something!')
+    file = request.files['file']
+    file.save(UPLOAD_FOLDER + file.filename)
+
+    return Response("file %s uploaded!" % file.filename, status=201, mimetype='application/json')
 
 def main():
     db_session.global_init("db/videos.sqlite")
