@@ -1,23 +1,11 @@
-{% extends "base.html" %}
+{% extends "text_page.html" %}
 
-{% block content %}
-<div class="row non_authorization-row" >
-    <div class="col order-2 col-sm-4 col-md-5 text-center">
-        <a href=""><img src="/static/styles/roboface.jpg" ></a>
+{% block textpage_content %}
+    <h1>Welcome to Vidosos!</h1>
+    <h3>You're not logged in. Join us to watch and share videos!
+    </h3>
+    <div class="textpage_buttons-row">
+        <a class="rainbow" href="/login">Log In</a>
+        <a class="rainbow" href="/register">Sign Up - It's Free!</a>
     </div>
-    <div class="col order-1 col-sm-8 col-md-7">
-        <h1>Welcome to Vidosos!</h1>
-        <h3>
-            You're not logged in. Join us to watch and share videos!
-        </h3>
-        <div class="non_auth_buttons-row">
-            <a class="rainbow" href="/login">
-                Log In
-            </a>
-            <a class="rainbow" href="/register">
-                Sign Up - It's Free!
-            </a>
-        </div>
-    </div>
-</div>
 {% endblock %}

@@ -243,14 +243,14 @@ a.buttons:not(:hover) {
 }
 
 /* ===== non_authorization & abnormal_situation ===== */
-.non_authorization-row img, .abnormal-row img{
+.textpage-row img{
     max-width: 100%;
     max-height: 200%;
 }
-.non_authorization-row h3, .abnormal-row h1{
+.textpage-row h3, .textpage-row h1{
     line-height:1.5;
 }
-.non_auth_buttons-row, .abnormal_buttons-row{
+.textpage_buttons-row{
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -261,11 +261,9 @@ a.buttons:not(:hover) {
     margin-top: 42px;
 }
 
-.non_auth_buttons-row a{
+.textpage-row a{
     margin: 0 20px 0 0;
 }
-
-.abnormal_buttons-row а::first-child {margin-right:20px;}
 
 a.rainbow {
     outline: 4px solid #e400e4;

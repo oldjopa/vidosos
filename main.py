@@ -48,7 +48,7 @@ def index():
     user = session.query(User).filter(User.id == current_user.id).first()
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
-        return render_template('abnormal_situation.html',
+        return render_template('abnormal_situation.html', hide_home_btn=True,
                                message=f"{user.name}, unfortunately there are no more videos to watch,"
                                        " but don't worry, there will be new ones soon.")
     random_video = random.choice(list(possible_videos))
@@ -220,7 +220,7 @@ def logout():
 
 @app.errorhandler(404)
 def not_found(error):
-    return render_template('abnormal_situation.html',
+    return render_template('404.html',
                            message='''404 There is not the web page you are looking for''')
 
 
