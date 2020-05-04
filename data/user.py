@@ -14,6 +14,8 @@ class User(SqlAlchemyBase, UserMixin):
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     age = sqlalchemy.Column(sqlalchemy.Integer)
     email = sqlalchemy.Column(sqlalchemy.String)
+    is_active = sqlalchemy.Column(sqlalchemy.Boolean)
+    act_id = sqlalchemy.Column(sqlalchemy.String)
     role = sqlalchemy.Integer
     own_videos = orm.relation("Video", secondary="own_video_association")
     viewed_videos = orm.relation("Video",

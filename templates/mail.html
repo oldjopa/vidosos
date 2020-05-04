@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width" name="viewport">
+
+    <style>
+        html{
+            width: 600px;
+        }
+        #back {
+            background: transparent url('http://app.makemail.ru/content/5fcfc29e141a5e0fabc591f617b78809.gif');
+        }
+
+        #main {
+            background: rgb(13, 10, 43, 0.7);
+            height: 550px;
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 60px;
+            text-align: center;
+            font-size: 20px;
+            color: rgb(163, 10, 180);
+        }
+
+        #header {
+            background: rgb(13, 0, 43);
+            text-align: center;
+            height: 130px;
+            font-size: 50px;
+            color: rgb(163, 10, 180);
+        }
+
+        .btn {
+            background-color: DodgerBlue;
+            border: none;
+            color: rgb(66, 11, 80);
+            padding: 30px 50px;
+            font-size: 40px;
+        }
+
+        #register {
+            padding-top: 130px;
+            font-size: 20px;
+            color: rgb(163, 10, 180);
+        }
+
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+    </style>
+
+<body>
+    <div id='header'>
+        Please, verify your email adress to sign in
+    </div>
+    <div id="back">
+        <div id='main'>
+            <br>
+            <br>
+            <h3>The last step before joining Vidosos community!</h3>
+            We need you to verify your email adress<br> to know you are real man
+            <div id='register'>
+                <a class='btn btn-success' href="%s">Verify email</a>
+                <br>
+                <br>
+                <br>
+                if doesnt work, try this: <a href="%s">%s</a>
+                <br>
+                if it wasn't you ignore this
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

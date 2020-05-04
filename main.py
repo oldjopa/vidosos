@@ -9,6 +9,8 @@ from data.assotiation_tables import *
 import vidosos_api
 from get_pic import get_pic
 from hash_name import *
+from send_mail import *
+import random
 
 from werkzeug.utils import secure_filename
 import os
@@ -34,9 +36,6 @@ def load_user(user_id):
     vidosos_api.set_user_id(user_id)
     session = db_session.create_session()
     return session.query(User).get(user_id)
-
-
-import random  # убрать потом
 
 
 @app.route('/')
@@ -66,6 +65,16 @@ def non_authorization():
     return render_template('non_authorization.html')
 
 
+@app.route('/verify/<a_id>')
+def register_active(a_id):
+    session = db_session.create_session()
+    user = session.query(User).filter(User.act_id == a_id).first()
+    user.is_active = True
+    session.merge(user)
+    session.commit()
+    return render_template('activate.html')
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -79,17 +88,21 @@ def register():
             return render_template('user_reg.html', title='Registration',
                                    form=form,
                                    message="This user already exists")
+        act_id = hash_password(form.login.data)
         user = User(
             name=form.name.data,
             login=form.login.data,
             age=form.age.data,
             email=form.email.data,
+            is_active=False,
+            act_id=act_id,
             likes=0,
             videos=0
         )
         user.set_password(form.password.data)
         session.add(user)
         session.commit()
+        send_mail(form.email.data, act_id)
         return redirect('/login')
     return render_template('user_reg.html', title='Registration', form=form)
 
@@ -101,7 +114,7 @@ def login():
         session = db_session.create_session()
         user = session.query(User).filter(User.login == form.login.data).first()
         session.commit()
-        if user and user.check_password(form.password.data):
+        if user and user.check_password(form.password.data) and user.is_active:
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         return render_template('user_log.html', title='Authorization',
