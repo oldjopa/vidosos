@@ -212,7 +212,7 @@ bottom:0px;
   margin-left: 10px;
   margin-top: 10px;
   background-color: rgb(38, 8, 48);
-  height: 300px;
+  padding: 10px 15px;
 }
 
 .buttons {
@@ -290,4 +290,12 @@ a.rainbow:focus{
   to {
     background-position:30vw;
   }
+}
+
+/* ===== scrolling videos ===== */
+.scroll_videos{
+    height: 650px;
+    overflow-y: scroll;
+    background: rgba(0, 0, 0, 0.5);
+
 }

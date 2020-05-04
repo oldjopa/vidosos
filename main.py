@@ -57,7 +57,7 @@ def index():
     src = f'/static/video/{random_video.filename}'
     vidosos_api.set_video_id(random_video.id)  # скармливаем апи id видео
     return render_template("index.html", src=src, description=random_video.description,
-                           like_number=len(random_video.liked_users))
+                           like_number=random_video.number_likes)
 
 
 @app.route('/non_authorization')
@@ -199,7 +199,7 @@ def get_user_videos(video_id=None):
         video_list.append((i, desc, name))
     session.commit()
     return render_template('view_videos.html', src=src, title='My videos',
-                           videos=video_list)
+                           videos=video_list, like_number=video.number_likes)
 
 
 @app.route('/delete_my_video/<video_id>')

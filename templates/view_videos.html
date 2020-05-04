@@ -31,8 +31,15 @@
             </div>
         </div>
         <script src="../static/styles/js.js"></script>
+        <div class='description'>
+            <span id='likes' ref='likes'>   {{ like_number }}</span> <i class="fa fa-thumbs-up"></i>
+            <br><br>
+            <span id='desc' class='word'>
+                {{ description }}
+            </span>
+        </div>
     </div>
-    <div class="col-12 col-sm-5">
+    <div class="col-12 col-sm-5 scroll_videos">
         {% for video in videos %}
             <div class="row my_videos-row" >
                 <div class="col-6 text-center">
