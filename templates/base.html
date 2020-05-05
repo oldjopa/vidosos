@@ -25,28 +25,22 @@
         <div class="menu">
             <ul class="navbar-nav mr-auto">
             {% if current_user.is_authenticated %}
+                <li class="nav-item likes_videos">
+                    <i class="fa fa-user"></i>{{current_user.login}}
+                </li>
                 <li class="nav-item">
-                    <a class="buttons" href="/add_video">Add Video</a>
+                    <a class="buttons" href="/my_videos/0">
+                        My videos
+                        <span class="likes_videos">{{current_user.likes}} <i class="fa fa-heart"></i></span>
+                        <span class="likes_videos">{{current_user.videos}} <i class="fa fa-video-camera"></i></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="buttons" href="/add_video"><i class="fa fa-plus likes_videos"></i> Add Video</a>
                 </li>
                 <li class="nav-item">
                     <a class="buttons" href="/logout">Log out</a>
                 </li>
-                <li class="nav-item">
-                    <a class="buttons" href="/my_videos/0">My videos</a>
-                </li>
-                <li class="nav-item likes_videos">
-                    {{current_user.login}}
-                </li>
-
-                <li class="nav-item likes_videos">
-                    <span>{{current_user.likes}} <i class="fa fa-heart"></i></span>
-                </li>
-                <li class="nav-item likes_videos">
-                    <span>{{current_user.videos}} <i class="fa fa-video-camera"></i></span>
-                </li>
-
-
-
             {% else %}
                 <li class="nav-item">
                     <a class="buttons" href="/register">Register</a>

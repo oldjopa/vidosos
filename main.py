@@ -186,6 +186,7 @@ def get_user_videos(video_id=None):
                                message=f"{user.name}, now you may share your videos with the world. Add them soon!")
     try:
         video = user.own_videos[int(video_id)]
+        description = video.description
     except Exception:
         return render_template('abnormal_situation.html',
                                message='Video not found')
@@ -194,12 +195,12 @@ def get_user_videos(video_id=None):
     for i, video in enumerate(users_videos):
         name = '../static/video/' + video.filename[:-4] + '.png'
         desc = video.description
-        if len(desc) > 60:
-            desc = desc[:57] + '...'
+        if len(desc) > 35:
+            desc = desc[:32] + '...'
         video_list.append((i, desc, name))
     session.commit()
     return render_template('view_videos.html', src=src, title='My videos',
-                           videos=video_list, like_number=video.number_likes)
+                           videos=video_list, description=description, like_number=video.number_likes)
 
 
 @app.route('/delete_my_video/<video_id>')

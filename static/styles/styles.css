@@ -59,6 +59,23 @@ h1{
     font-size:26px;
 }
 
+.buttons .nav-item:nth-child(1){
+    width: 200px;
+}
+
+.nav-item a{
+    padding: 10px 16px;
+}
+
+.nav-item{
+    margin-right: 2px;
+}
+
+.nav-item a:hover,
+.nav-item a:focus {
+    text-decoration: none;
+}
+
 .likes_videos{
     font-size: 32px;
     color: #e400e4
@@ -111,7 +128,7 @@ h1{
 }
 
 .word{
-    font-size: 18px;
+    font-size: 24px;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     -ms-hyphens: auto;
@@ -126,6 +143,8 @@ h1{
 .other_btn{
     max-width: 100%;
     height: 100%;
+    border-radius: 0px !important;
+
 }
 
 form. h1 {
@@ -204,26 +223,27 @@ bottom:0px;
 }
 
 #likes {
-  background-color: rgb(86, 26, 104);
-  margin-left: 10px;
+    margin-left: 10px;
+    color: #e400e4
 }
 
 .description {
-  margin-left: 10px;
-  margin-top: 10px;
-  background-color: rgb(38, 8, 48);
-  padding: 10px 15px;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: rgb(38, 8, 48);
+    padding: 10px 15px;
+    font-size: 24px;
+
 }
 
 .buttons {
-  width: 150px;
-  text-decoration: none;
-  color: #a675b3;
-  text-align: center;
-  line-height: 20px;
-  display: block;
-  margin: 5px auto;
-  font: normal 28px sans-serif;
+    text-decoration: none;
+    color: #a675b3;
+    text-align: center;
+    line-height: 20px;
+    display: block;
+    margin: 5px auto;
+    font: normal 32px sans-serif;
 }
 
 a.buttons:not(.active) {
