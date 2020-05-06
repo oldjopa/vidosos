@@ -20,8 +20,8 @@ def send_mail(to, href):
 
     # me == the sender's email address
     # you == the recipient's email address
-    msg['Subject'] = f'The contents of {textfile}'
-    msg['From'] = 'lol@lol'
+    msg['Subject'] = f'Verify your email'
+    msg['From'] = 'verify-vidosos'
     msg['To'] = to
 
     smtpObj.login('vidososverify@gmail.com', 'kek228lol')

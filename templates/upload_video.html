@@ -2,39 +2,35 @@
 
 {% block content %}
 <h1 class="text-center">{{ title }} <a class="btn btn-success" href="/">Back</a></h1>
-<link rel="stylesheet"
-          href="static/styles/styles.css">
+<link rel="stylesheet" href="../static/styles/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<style>
+  #desc {
+    line-height: 2em;
+  }
+  #dl {
+    width: 300px;
+  }
+</style>
+
 <div class="form">
-<form action="" method="post" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    {{ form.csrf_token }}
-    <p class="red">
-        {{message}}
-    </p>
-	<p>
-        {{ form.description.label }}<br>
-        <p class="text_area">
-            {{ form.description(class="form-control",
-            type="description", cols=70, rows=10) }}<br>
-        </p>
-        {% for error in form.description.errors %}
-            <p class="alert alert-danger font-normal" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.file.label }}<br>
-        <p class="font-normal">
-            {{ form.file(class="form-control", type="file") }}<br>
-        </p>
-        {% for error in form.file.errors %}
-            <p class="alert alert-danger font-normal" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit(type="submit", class="btn btn-primary font-normal") }}</p>
-</form>
+  <div id="app">
+    <form class='font-normal' id="uploadForm" name="uploadForm" enctype="multipart/form-data">
+
+      <input type="file" id="file" name="file" accept="video/mp4"><br><br>
+      Description
+      <br>
+      <textarea rows="10" cols="45" name="description" id="desc"></textarea><br><br>
+      <input class="btn btn-primary font-normal" type=button value=Upload @click="uploadFiles">
+      <br>
+      <br>
+      <progress id="dl" max="100" :value.prop="uploadPercentage" v-show='act'></progress>
+
+    </form>
+    <div v-show='msg'>please, select file</div>
+    <script src="static/styles/upload.js"></script>
+  </div>
 </div>
 {% endblock %}
