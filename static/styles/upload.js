@@ -16,7 +16,7 @@ new Vue({
         //        console.log('ass we can')
         //        console.log(videofile.files[0])
         data.append('file', videofile.files[0])
-        axios.post('http://127.0.0.1:5000/add_video', data, {
+        axios.post('http://mesenev.ru:1111/add_video', data, {
           headers: {
             'Content-Type': 'multipart/form-data'
           },
