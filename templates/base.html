@@ -15,20 +15,44 @@
 <body>
 <header>
     <div class="head">
-    <nav class="navbar navbar-light">
-        <a class="text-1" href="/">VIDOSOS - the best video base</a>
-        {% if current_user.is_authenticated %}
-        <a class="btn btn-success" href="/add_video">Add Video</a>
-        <a class="navbar-brand navbar-username" href="/my_videos/0">{{ current_user.login }}</a>
-        <a class="btn btn-success" href="/logout">Log out</a>
-        {% else %}
-        <p>
-            <a class="btn btn-primary " href="/register">Register</a>
-            <a class="btn btn-success" href="/login">Log in</a>
-        </p>
-        {% endif %}
-    </nav>
+    <nav class="navbar navbar-expand-md">
+        <a class="navbar-brand navbar-brand-text" href="/">
+            <span>VIDOSOS</span><span>the best video base</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="menu">
+            <ul class="navbar-nav mr-auto">
+            {% if current_user.is_authenticated %}
+                <li class="nav-item likes_videos">
+                    <i class="fa fa-user"></i>{{current_user.login}}
+                </li>
+                <li class="nav-item">
+                    <a class="buttons" href="/my_videos/0">
+                        My videos
+                        <span class="likes_videos">{{current_user.likes}} <i class="fa fa-heart"></i></span>
+                        <span class="likes_videos">{{current_user.videos}} <i class="fa fa-video-camera"></i></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="buttons" href="/add_video"><i class="fa fa-plus likes_videos"></i> Add Video</a>
+                </li>
+                <li class="nav-item">
+                    <a class="buttons" href="/logout">Log out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="buttons" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="buttons" href="/login">Log in</a>
+                </li>
+            {% endif %}
+            </ul>
         </div>
+    </nav>
+    </div>
 </header>
 <!-- Begin page content -->
 <main role="main" class="container">

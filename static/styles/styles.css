@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700');
+
 html {
-  /* background: url(/vidosos/static/styles/back.bmp) no-repeat; */
-  /*background: url(back.bmp) no-repeat;*/
     align-items: center;
     text-align: center;
     position: relative;
     min-height: 100%;
 }
-
 body{
+    font-family: 'Nunito', sans-serif;
     background: url('bg.jpg') repeat;
     background-color: rgb(13, 0, 43) !important;
     margin-bottom: 227px;
@@ -17,9 +17,9 @@ body{
 	src: url(Neoneon1.otf); 
 }
 .container[role=main]{
-    background: rgb(13, 0, 43);
+    background: rgb(13, 0, 43, 0.4);
     color: #fff;
-    margin-top:60px;
+    margin-top: 60px;
     padding: 30px 0 100px
 }
 footer{
@@ -29,6 +29,12 @@ footer{
     bottom: 0;
     width: 100%;
 }
+h1{
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 2px rgba(228,0,228,1);
+}
+
 .my_videos-row{
     margin-bottom: 20px;
 }
@@ -36,35 +42,62 @@ footer{
     max-width: 100%;
     max-height: 200px;
 }
-.non_authorization-row{
-    margin-left: 20px;
+
+.navbar-brand-text {
+    font-family: 'FontName';
+    font-size: 50px;
+    color: rgb(163, 10, 180);
+    margin-top: 10px;
 }
-.non_authorization-row img{
-    max-width: 100%;
-    max-height: 200%;
+.navbar-brand-text span{
+    display:block;
 }
-.text-1 {
-	font-family: 'FontName'; 
-  font-size: 50px;
-  color: rgb(163, 10, 180);
+.navbar-brand-text span:nth-child(1){
+    font-size:66px;
+}
+.navbar-brand-text span:nth-child(2){
+    font-size:26px;
 }
 
+.buttons .nav-item:nth-child(1){
+    width: 200px;
+}
+
+.nav-item a{
+    padding: 10px 16px;
+}
+
+.nav-item{
+    margin-right: 2px;
+}
+
+.nav-item a:hover,
+.nav-item a:focus {
+    text-decoration: none;
+}
+
+.likes_videos{
+    font-size: 32px;
+    color: #e400e4
+}
 .form {
-  font-family: 'FontName';
-  font-size: 20px;
-  color: rgb(163, 10, 180);
-  margin-right: 150px;
-  margin-left: 150px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  background-color: rgb(13, 0, 43);
-  text-align: center;
-  height: fit-content;
-  min-width: fit-content;
+      font-family: sans-serif;
+      font-size: 26px;
+      color: rgb(163, 10, 180);
+      margin-right: 150px;
+      margin-left: 150px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      text-align: center;
+      height: fit-content;
+      min-width: fit-content;
+}
+
+.form-control {
+    font-size: inherit;
 }
 
 .btn {
-    background-color: DodgerBlue;
     border: none;
     color: white;
     padding: 4px 8px;
@@ -88,14 +121,14 @@ footer{
 }
 
 .red{
-    color: red !important;
+    color: rgb(255, 20, 40) !important;
     font-size: 32px !important;
     font-family: sans-serif !important;
     font-weight: bold !important;
 }
 
 .word{
-    font-size: 18px;
+    font-size: 24px;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     -ms-hyphens: auto;
@@ -110,29 +143,32 @@ footer{
 .other_btn{
     max-width: 100%;
     height: 100%;
+    border-radius: 0px !important;
+
 }
 
-.font-normal{
-    font-family: sans-serif !important;
-    font-size: 24px;
+form. h1 {
+    font-family: 'FontName'
 }
 
 video{
     max-width:100%;
 }
 
-.head{
+/*.head{
   background-color: rgb(23, 12, 87);
   text-align: center;
   height: 100px;
   min-height: fit-content;
   min-width: fit-content;
+}*/
+.navbar {
+    background-color: rgb(23, 12, 87);
+    min-height: fit-content;
+    min-width: fit-content;
 }
 .navbar-brand.navbar-username{
     color: #fff;
-}
-.btn:hover {
-    background-color: RoyalBlue;
 }
 
 #dynamic {
@@ -187,15 +223,101 @@ bottom:0px;
 }
 
 #likes {
-  background-color: rgb(86, 26, 104);
-  margin-left: 10px;
+    margin-left: 10px;
+    color: #e400e4
 }
 
 .description {
-  margin-left: 10px;
-  margin-top: 10px;
-  background-color: rgb(38, 8, 48);
-  height: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: rgb(38, 8, 48);
+    padding: 10px 15px;
+    font-size: 24px;
+
+}
+
+.buttons {
+    text-decoration: none;
+    color: #a675b3;
+    text-align: center;
+    line-height: 20px;
+    display: block;
+    margin: 5px auto;
+    font: normal 32px sans-serif;
+}
+
+a.buttons:not(.active) {
+  box-shadow: inset 0 1px 1px rgba(111, 55, 125, 0.8), inset 0 -1px 0px rgba(63, 59, 113, 0.2), 0 9px 16px 0 rgba(0, 0, 0, 0.3), 0 4px 3px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px #150a1e;
+  background-image: linear-gradient(#3b2751, #271739); /*<--#007bff, #6610f2)-->*/
+  text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 -1px 0 #311d47;
+}
+
+a.buttons:not(.active):hover,
+a.buttons:not(.active):focus {
+  transition: color 200ms linear, text-shadow 500ms linear;
+  color: #fff;
+  text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 0 10px rgba(223, 206, 228, 0.4), 0 0 2px #2a153c;
+}
+a.buttons:not(:hover) {
+    transition: 0.6s;
+}
+
+/* ===== non_authorization & abnormal_situation ===== */
+.textpage-row img{
+    max-width: 100%;
+    max-height: 200%;
+}
+.textpage-row h3, .textpage-row h1{
+    line-height:1.5;
+}
+.textpage_buttons-row{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    margin-top: 42px;
+}
+
+.textpage-row a{
+    margin: 0 20px 0 0;
+}
+
+a.rainbow {
+    outline: 4px solid #e400e4;
+    padding: 16px 48px;
+    text-decoration: none;
+    font-size: 34px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    background: #000;
+}
+a.rainbow:hover,
+a.rainbow:focus,
+a.rainbow:active{
+    /*outline: none;*/
+    color: #fff !important;
+}
+a.rainbow:hover,
+a.rainbow:focus{
+      background-image: linear-gradient(to right, #e400e4, #960081, #2e0097, #000075, #2e0097,#960081, #e400e4);
+      animation: slidebg 2s linear infinite;
+}
+@keyframes slidebg {
+  to {
+    background-position:30vw;
+  }
+}
+
+/* ===== scrolling videos ===== */
+.scroll_videos{
+    height: 650px;
+    overflow-y: scroll;
+    background: rgba(0, 0, 0, 0.5);
+
 }
 
 .playpause {

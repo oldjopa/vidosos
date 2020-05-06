@@ -47,8 +47,8 @@ def index():
     user = session.query(User).filter(User.id == current_user.id).first()
     possible_videos = all_videos - set(user.viewed_videos)
     if not possible_videos:
-        return render_template('abnormal_situation.html',
-                               message="Unfortunately, there are no more videos to watch,"
+        return render_template('abnormal_situation.html', hide_home_btn=True,
+                               message=f"{user.name}, unfortunately there are no more videos to watch,"
                                        " but don't worry, there will be new ones soon.")
     random_video = random.choice(list(possible_videos))
     user.viewed_videos.append(random_video)
@@ -57,13 +57,12 @@ def index():
     src = f'/static/video/{random_video.filename}'
     vidosos_api.set_video_id(random_video.id)  # скармливаем апи id видео
     return render_template("index.html", src=src, description=random_video.description,
-                           like_number=len(random_video.liked_users))
+                           like_number=random_video.number_likes)
 
 
 @app.route('/non_authorization')
 def non_authorization():
-    return render_template('abnormal_situation.html',
-                           message="You are not logged in. Register or log in.")
+    return render_template('non_authorization.html')
 
 
 @app.route('/verify/<a_id>')
@@ -91,12 +90,14 @@ def register():
                                    message="This user already exists")
         act_id = hash_password(form.login.data)
         user = User(
+            name=form.name.data,
             login=form.login.data,
             age=form.age.data,
-            gender=form.gender.data,
             email=form.email.data,
             is_active=False,
-            act_id=act_id
+            act_id=act_id,
+            likes=0,
+            videos=0
         )
         user.set_password(form.password.data)
         session.add(user)
@@ -198,9 +199,10 @@ def get_user_videos(video_id=None):
         & (Video.id == own_video_table.c.video_id)).all()
     if not users_videos:
         return render_template('abnormal_situation.html',
-                               message="You don't have a video yet. Add them soon!")
+                               message=f"{user.name}, now you may share your videos with the world. Add them soon!")
     try:
         video = user.own_videos[int(video_id)]
+        description = video.description
     except Exception:
         return render_template('abnormal_situation.html',
                                message='Video not found')
@@ -209,12 +211,12 @@ def get_user_videos(video_id=None):
     for i, video in enumerate(users_videos):
         name = '../static/video/' + video.filename[:-4] + '.png'
         desc = video.description
-        if len(desc) > 60:
-            desc = desc[:57] + '...'
+        if len(desc) > 35:
+            desc = desc[:32] + '...'
         video_list.append((i, desc, name))
     session.commit()
     return render_template('view_videos.html', src=src, title='My videos',
-                           videos=video_list)
+                           videos=video_list, description=description, like_number=video.number_likes)
 
 
 @app.route('/delete_my_video/<video_id>')
@@ -225,6 +227,8 @@ def delete_my_video(video_id):
     user = session.query(User).filter(User.id == current_user.id).first()
     video = user.own_videos[int(video_id)]
     if video:
+        user.likes -= video.number_likes
+        user.videos -= 1
         user.own_videos.remove(video)
         session.delete(video)
         session.commit()
@@ -242,6 +246,12 @@ def logout():
     logout_user()
     vidosos_api.set_user_id(-1)
     return redirect("/")
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html',
+                           message='''404 There is not the web page you are looking for''')
 
 
 def main():

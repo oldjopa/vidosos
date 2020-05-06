@@ -31,7 +31,7 @@
         <div id="control">
             <button class="btn" @click="play"><i :class="ic"></i></button>
             <a class="btn" href="/"><i class="fas fa-step-forward"></i></a>
-            <button class="btn" @click="like" id="like"><i class="fa fa-thumbs-up"></i></button>
+            <button class="btn" @click="like" id="like"><i class="fa fa-heart"></i></button>
 
             <progress value='0' max='100' class='pr' id='bar' ref="bar" @click="prg"></progress>
             <span id='time' ref="time">
@@ -43,8 +43,8 @@
                 @mouseout='mouseout'>
         </div>
         <div class='description'>
-            <span id='likes' ref='likes'>   {{ like_number }}</span> <i class="fa fa-thumbs-up"></i>
-            <br><br>
+            <span id='likes' ref='likes'>{{ like_number }} </span> <i class="fa fa-heart likes_videos"></i>
+            <br>
             <span id='desc' class='word'>
                 {{ description }}
             </span>

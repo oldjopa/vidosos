@@ -4,7 +4,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link href="../static/styles/slider.css" rel="stylesheet" />
-<h1 class="text-center">{{ title }} <a class="btn btn-success" href="/">Back</a></h1>
+<h1 class="text-center">{{ title }} <a class="likes_videos" href="/"><i class="fa fa-home"></i></a></h1>
 <div class="row">
     <div class="col-12 col-sm-7">
         <div class="top">
@@ -31,8 +31,15 @@
             </div>
         </div>
         <script src="../static/styles/js.js"></script>
+        <div class='description'>
+            <span id='likes' ref='likes'>{{ like_number }} </span><i class="fa fa-heart likes_videos"></i>
+            <br>
+            <span id='desc' class='word'>
+                {{ description }}
+            </span>
+        </div>
     </div>
-    <div class="col-12 col-sm-5">
+    <div class="col-12 col-sm-5 scroll_videos">
         {% for video in videos %}
             <div class="row my_videos-row" >
                 <div class="col-6 text-center">
@@ -42,12 +49,12 @@
                 </div>
                 <div class="col-6 desc_row">
                     <p class="word">{{ video[1] }}</p>
-                    <div class="row">
-                        <a class="btn btn-danger btn-sm other_btn font-normal"
+                    <p>
+                        <a class="btn btn-danger btn-sm other_btn"
                            role="button" href="/delete_my_video/{{ video[0] }}">
                             Delete
                         </a>
-                    </div>
+                    </p>
                 </div>
             </div>
         {% endfor %}

@@ -3,13 +3,8 @@
 {% block textpage_content %}
     <h1>{{message}}</h1>
     <div class="textpage_buttons-row">
-        {% if not hide_home_btn %}
         <a class="rainbow" href="/">
             <i class="fa fa-home"></i> Back to main page
-        </a>
-        {% endif %}
-        <a class="rainbow" href="/add_video">
-            <i class="fa fa-plus"></i> Add Video
         </a>
     </div>
 {% endblock %}
