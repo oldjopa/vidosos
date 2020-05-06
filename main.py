@@ -20,8 +20,14 @@ def index():
 
 
 def main():
+<<<<<<< Updated upstream
     db_session.global_init("db/blogs.sqlite")
     app.run()
+=======
+    db_session.global_init("db/videos.sqlite")
+    app.register_blueprint(vidosos_api.blueprint)
+    app.run(host='0.0.0.0', port='81')
+>>>>>>> Stashed changes
 
 
 if __name__ == '__main__':
