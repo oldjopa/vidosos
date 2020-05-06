@@ -1,34 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<link rel="stylesheet"
-          href="static/styles/styles.css">
 <div class="form">
     <h1>{{ title }}</h1>
-    <form action="" method="post">
+    <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         {{ form.csrf_token }}
-        <p class="alert alert-danger">
+        <p class="red">
             {{message}}
         </p>
-        <p>
-            {{ form.login.label }}<br>
+        <div class="input-group mb-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+            </div>
             {{ form.login(class="form-control", type="text") }}<br>
             {% for error in form.login.errors %}
-                <p class="alert alert-danger" role="alert">
-                    {{ error }}
-                </p>
+            <div class="invalid-tooltip">
+                {{ error }}
+            </div>
             {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(class="form-control", type="password") }}<br>
+        </div>
+        <div class="input-group mb-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+            </div>
+            {{ form.password(class="form-control", type="text") }}<br>
             {% for error in form.password.errors %}
-                <p class="alert alert-danger" role="alert">
-                    {{ error }}
-                </p>
+            <div class="invalid-tooltip">
+                {{ error }}
+            </div>
             {% endfor %}
-        </p>
+        </div>
         <p>{{ form.submit(type="submit", class="buttons") }}</p>
     </form>
 </div>
