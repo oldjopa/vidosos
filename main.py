@@ -103,7 +103,7 @@ def register():
         session.add(user)
         session.commit()
         send_mail(form.email.data, act_id)
-        return render_template('abnormal_situation.html',
+        return render_template('activation.html',
                                message="A verify message was sent to your email address. Please follow the link in the message")
     return render_template('user_reg.html', title='Registration', form=form)
 
@@ -172,20 +172,6 @@ def add_video():
 
     return render_template('upload_video.html',
                            title='Uploading video')
-
-
-# @app.route('/add_video', methods=['GET', 'POST'])
-# def add_video():
-#     if not current_user.is_authenticated:
-#         return redirect('/non_authorization')
-#     if request.method == 'POST':
-#         file = dict(request.files)['file']
-#         filename = hash_password(file.filename) + '.mp4'
-#         path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-#         file.save(path_video)
-#         # return redirect('/my_videos/0', code=302)
-#     return render_template('l_video.html',
-#                            title='Uploading video')
 
 
 @app.route('/my_videos/<video_id>', methods=['GET'])
