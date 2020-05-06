@@ -187,6 +187,7 @@ def get_user_videos(video_id=None):
     try:
         video = user.own_videos[int(video_id)]
         description = video.description
+        number_likes = video.number_likes
     except Exception:
         return render_template('abnormal_situation.html',
                                message='Video not found')
@@ -200,7 +201,7 @@ def get_user_videos(video_id=None):
         video_list.append((i, desc, name))
     session.commit()
     return render_template('view_videos.html', src=src, title='My videos',
-                           videos=video_list, description=description, like_number=video.number_likes)
+                           videos=video_list, description=description, like_number=number_likes)
 
 
 @app.route('/delete_my_video/<video_id>')
@@ -214,6 +215,7 @@ def delete_my_video(video_id):
         user.likes -= video.number_likes
         user.videos -= 1
         user.own_videos.remove(video)
+        session.merge(user)
         session.delete(video)
         session.commit()
     else:

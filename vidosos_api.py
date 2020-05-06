@@ -54,3 +54,10 @@ def get_jobs():
             return jsonify({'error': 'server error'})
     else:
         return jsonify({'error': '306'})
+
+
+@blueprint.route('/api/user_likes', methods=['GET'])
+def get_user_likes():
+    session = db_session.create_session()
+    user = session.query(User).filter(User.id == u_id).first()
+    return str(user.likes)
