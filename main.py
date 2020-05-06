@@ -102,7 +102,8 @@ def register():
         session.add(user)
         session.commit()
         send_mail(form.email.data, act_id)
-        return redirect('/login')
+        return render_template('abnormal_situation.html',
+                               message="A verify message was sent to your email address. Please follow the link in the message")
     return render_template('user_reg.html', title='Registration', form=form)
 
 
@@ -113,9 +114,14 @@ def login():
         session = db_session.create_session()
         user = session.query(User).filter(User.login == form.login.data).first()
         session.commit()
-        if user and user.check_password(form.password.data) and user.is_active:
-            login_user(user, remember=form.remember_me.data)
-            return redirect("/")
+        if user and user.check_password(form.password.data):
+            if user.is_active:
+                login_user(user, remember=form.remember_me.data)
+                return redirect("/")
+            else:
+                return render_template('user_log.html', title='Authorization',
+                                       message="Your account is not activated yet. Please, verify your email",
+                                       form=form)
         return render_template('user_log.html', title='Authorization',
                                message="Wrong login or password",
                                form=form)
@@ -138,36 +144,47 @@ def allowed_file(filename):
 def add_video():
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
-    form = AddVideo()
     if request.method == 'POST':
-        if form.validate_on_submit():
-            file = form.file.data
-            if file and allowed_file(file.filename):
-                filename = hash_password(file.filename) + '.mp4'
-                path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(path_video)
-                get_pic(path_video)
-                session = db_session.create_session()
-                video = Video(
-                    description=form.description.data,
-                    filename=filename,
-                    owner_id=current_user.id,
-                    # number_likes=0
-                )
-                user = session.query(User).filter(User.id == current_user.id).first()
-                user.own_videos.append(video)
-                video.owner = user
-                video.owner_id = user.id
-                session.add(video)
-                session.merge(user)
-                session.commit()
-                return redirect('/my_videos/0')
-            elif file and not allowed_file(file.filename):
-                return render_template('upload_video.html', form=form, title='Uploading video',
-                                       message="Sorry, the project only supports videos in mp4 format")
+        file = dict(request.files)['file']
+        if file and allowed_file(file.filename):
+            filename = hash_password(file.filename) + '.mp4'
+            path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(path_video)
+            get_pic(path_video)
+            session = db_session.create_session()
+            video = Video(
+                description=dict(request.form)['description'],
+                filename=filename,
+                owner_id=current_user.id,
+                # number_likes=0
+            )
+            user = session.query(User).filter(User.id == current_user.id).first()
+            user.own_videos.append(video)
+            video.owner = user
+            video.owner_id = user.id
+            session.add(video)
+            session.merge(user)
+            session.commit()
+            # return redirect('/my_videos/0')
+        elif file and not allowed_file(file.filename):
+            return jsonify({'error': 'wrong file format'})
 
-    return render_template('upload_video.html', form=form,
+    return render_template('upload_video.html',
                            title='Uploading video')
+
+
+# @app.route('/add_video', methods=['GET', 'POST'])
+# def add_video():
+#     if not current_user.is_authenticated:
+#         return redirect('/non_authorization')
+#     if request.method == 'POST':
+#         file = dict(request.files)['file']
+#         filename = hash_password(file.filename) + '.mp4'
+#         path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+#         file.save(path_video)
+#         # return redirect('/my_videos/0', code=302)
+#     return render_template('l_video.html',
+#                            title='Uploading video')
 
 
 @app.route('/my_videos/<video_id>', methods=['GET'])
