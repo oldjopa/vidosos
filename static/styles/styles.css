@@ -67,9 +67,6 @@ h1{
     padding: 10px 16px;
 }
 
-.nav-item{
-    margin-right: 2px;
-}
 
 .nav-item a:hover,
 .nav-item a:focus {
@@ -244,22 +241,26 @@ bottom:0px;
     display: block;
     margin: 5px auto;
     font: normal 32px sans-serif;
+    border: 2px solid transparent;
 }
 
-a.buttons:not(.active) {
+.buttons:not(.active) {
   box-shadow: inset 0 1px 1px rgba(111, 55, 125, 0.8), inset 0 -1px 0px rgba(63, 59, 113, 0.2), 0 9px 16px 0 rgba(0, 0, 0, 0.3), 0 4px 3px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px #150a1e;
   background-image: linear-gradient(#3b2751, #271739); /*<--#007bff, #6610f2)-->*/
   text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 -1px 0 #311d47;
 }
 
-a.buttons:not(.active):hover,
-a.buttons:not(.active):focus {
+.buttons:not(.active):hover,
+.buttons:not(.active):focus {
   transition: color 200ms linear, text-shadow 500ms linear;
   color: #fff;
   text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 0 10px rgba(223, 206, 228, 0.4), 0 0 2px #2a153c;
 }
-a.buttons:not(:hover) {
+.buttons:not(:hover) {
     transition: 0.6s;
+}
+input[type="submit"]{
+    padding: 12px 80px;
 }
 
 /* ===== non_authorization & abnormal_situation ===== */
