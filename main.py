@@ -157,7 +157,7 @@ def add_video():
                 description=dict(request.form)['description'],
                 filename=filename,
                 owner_id=current_user.id,
-                # number_likes=0
+                number_likes=0
             )
             user = session.query(User).filter(User.id == current_user.id).first()
             user.own_videos.append(video)
