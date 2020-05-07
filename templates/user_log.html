@@ -24,7 +24,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
             </div>
-            {{ form.password(class="form-control", type="text") }}<br>
+            {{ form.password(class="form-control", type="password") }}<br>
             {% for error in form.password.errors %}
             <div class="invalid-tooltip">
                 {{ error }}
