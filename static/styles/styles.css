@@ -147,7 +147,7 @@ h1{
 
 }
 
-form. h1 {
+form.h1 {
     font-family: 'FontName'
 }
 
@@ -196,6 +196,7 @@ video{
 }
 
 #volume {
+  vertical-align	: middle;
   width: 100px;
 }
 
