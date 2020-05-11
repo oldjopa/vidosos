@@ -6,16 +6,13 @@ from data.forms import *
 from data.user import User
 from data.video import Video
 from data.assotiation_tables import *
-import vidosos_api
-from get_pic import get_pic
-from hash_name import *
-from send_mail import *
+from utils import vidosos_api
+from utils.get_pic import get_pic
+from utils.hash_name import *
+from utils.send_mail import *
 import random
 
-from werkzeug.utils import secure_filename
 import os
-
-import hashlib
 
 UPLOAD_FOLDER = "/static/video"
 
