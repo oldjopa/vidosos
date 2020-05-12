@@ -1,8 +1,8 @@
 {% extends "text_page.html" %}
 
 {% block textpage_content %}
-    <h1>{{message}}</h1>
-    <div class="textpage_buttons-row">
+    <h1 class="text-center text-md-left">{{message}}</h1>
+    <div class="textpage_buttons-row flex-column flex-lg-row">
         {% if not hide_home_btn %}
         <a class="rainbow" href="/">
             <i class="fa fa-home"></i> Back to main page
