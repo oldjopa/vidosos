@@ -4,15 +4,19 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <link href="../static/styles/slider.css" rel="stylesheet" />
-<h1 class="text-center">{{ title }} <a class="likes_videos" href="/"><i class="fa fa-home"></i></a></h1>
+<h1 class="text-center">{{ title }}
+    <a class="likes_videos buttons" href="/"><i class="fa fa-home"></i></a>
+</h1>
 <div class="row">
-    <div class="col-12 col-sm-7">
+    <div class="col-12 col-md-7">
         <div class="top">
             <div id="app" class="cntr">
-                <video width="100%" height="90%" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
-                    @timeupdate="timeupdate">
-                    <source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
-                </video>
+                <div class='embed-responsive embed-responsive-16by9'>
+                    <video width="100%" height="90%" id="video-player" ref="videoRef" @click="play" @canplay='can_play'
+                        @timeupdate="timeupdate">
+                        <source src="{{ src }}" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+                    </video>
+                </div>
 
                 <div id="control">
                     <button class="btn" @click="play"><i :class="ic"></i></button>
@@ -39,7 +43,7 @@
             </span>
         </div>
     </div>
-    <div class="col-12 col-sm-5 scroll_videos">
+    <div class="col-12 col-md-5 scroll_videos">
         {% for video in videos %}
             <div class="row my_videos-row" >
                 <div class="col-6 text-center">
@@ -50,9 +54,9 @@
                 <div class="col-6 desc_row">
                     <p class="word">{{ video[1] }}</p>
                     <p>
-                        <a class="btn btn-danger btn-sm other_btn"
+                        <a class="buttons buttons-delete"
                            role="button" href="/delete_my_video/{{ video[0] }}">
-                            Delete
+                            <i class="fa fa-trash-o"></i>&nbsp;Delete
                         </a>
                     </p>
                 </div>
