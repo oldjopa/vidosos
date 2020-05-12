@@ -6,6 +6,9 @@ new Vue({
     act: false
   },
   methods: {
+    getFileInputValue (e) {
+        this.$el.querySelector('.custom-file-label').innerText = e.target.files[0].name;
+    },
     uploadFiles() {
       var s = this
       const data = new FormData(document.getElementById('uploadForm'))

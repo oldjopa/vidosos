@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="text-center">{{ title }} <a class="btn btn-success" href="/">Back</a></h1>
-<link rel="stylesheet" href="../static/styles/styles.css">
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
 <style>
   #desc {
     line-height: 2em;
@@ -14,22 +11,29 @@
     width: 300px;
   }
 </style>
-
+<h1 class="text-center">{{ title }} <a class="buttons likes_videos" href="/"><i class="fa fa-home"></i></a></h1>
 <div class="form">
   <div id="app">
-    <form class='font-normal' id="uploadForm" name="uploadForm" enctype="multipart/form-data">
-
-      <input type="file" id="file" name="file" accept="video/mp4"><br><br>
-      Description
-      <br>
-      <textarea rows="10" cols="45" name="description" id="desc"></textarea><br><br>
-      <input class="btn btn-primary font-normal" type=button value=Upload @click="uploadFiles">
+    <form class="font-normal" id="uploadForm" name="uploadForm" enctype="multipart/form-data">
+      <div class="input-group mb-3">
+        <div class="custom-file">
+          <label class="custom-file-label text-left" for="file">Choose file</label>
+          <input type="file" id="file" name="file" accept="video/mp4" class="custom-file-input" @change="getFileInputValue">
+        </div>
+      </div>
+      <p>Description</p>
+      <textarea rows="7" name="description" id="desc" class="w-100" required></textarea><br><br>
+      <div class="alert alert-light" role="alert">
+        Please note that you can upload only .mp4 files
+      </div>
+      <input class="buttons" type=button value=Upload @click="uploadFiles">
       <br>
       <br>
       <progress id="dl" max="100" :value.prop="uploadPercentage" v-show='act'></progress>
+      <div v-show='msg' class="alert alert-danger">please, select file</div>
 
     </form>
-    <div v-show='msg'>please, select file</div>
+
     <script src="static/scripts/upload.js"></script>
   </div>
 </div>
