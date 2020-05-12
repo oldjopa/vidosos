@@ -24,13 +24,13 @@ new Vue({
             this.uploadPercentage = parseInt(Math.round((progressEvent.loaded / progressEvent.total) * 90));
           }.bind(this)
         })
-          .then(response => {
+          .then((response) => {
             // console.log(response)
             window.location.replace("/my_videos/0");
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error.response)
-            alert('unexpected server error, please try another file')
+            alert('unexpected server error, please try another .mp4 file')
           })
       } else {
         this.msg = true

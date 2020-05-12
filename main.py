@@ -143,7 +143,7 @@ def add_video():
     if not current_user.is_authenticated:
         return redirect('/non_authorization')
     if request.method == 'POST':
-        file = dict(request.files)['file']
+        file = request.files['file']
         if file and allowed_file(file.filename):
             filename = hash_password(file.filename) + '.mp4'
             path_video = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -151,13 +151,14 @@ def add_video():
             get_pic(path_video)
             session = db_session.create_session()
             video = Video(
-                description=dict(request.form)['description'],
+                description=request.form['description'],
                 filename=filename,
                 owner_id=current_user.id,
                 number_likes=0
             )
             user = session.query(User).filter(User.id == current_user.id).first()
             user.own_videos.append(video)
+            user.videos += 1
             video.owner = user
             video.owner_id = user.id
             session.add(video)
@@ -165,7 +166,8 @@ def add_video():
             session.commit()
             # return redirect('/my_videos/0')
         elif file and not allowed_file(file.filename):
-            return jsonify({'error': 'wrong file format'})
+            return make_response(jsonify({'error': 'wrong file format'}), 406)
+            #return jsonify({'error': 'wrong file format'})
 
     return render_template('upload_video.html',
                            title='Uploading video')
