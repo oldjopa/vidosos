@@ -15,44 +15,27 @@
 </head>
 <body>
 <header>
-    <div class="head">
-    <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand navbar-brand-text" href="/">
-            <span>VIDOSOS</span><span>the best video base</span>
+    <div class="header d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
+        <a class="my-0 mr-md-auto navbar-brand-text" href="/">
+            <h5 class="font-weight-normal">
+                <span>VIDOSOS</span><span>the best video base</span>
+            </h5>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="menu">
-            <ul class="navbar-nav mr-auto">
+        <nav class="my-2 my-md-0 mr-md-3 text-center">
             {% if current_user.is_authenticated %}
-                <li class="nav-item likes_videos">
-                    <i class="fa fa-user"></i>{{current_user.login}}
-                </li>
-                <li class="nav-item">
-                    <a class="buttons" href="/my_videos/0">
-                        My videos
-                        <span class="likes_videos">{{current_user.likes}} <i class="fa fa-heart"></i></span>
-                        <span class="likes_videos">{{current_user.videos}} <i class="fa fa-video-camera"></i></span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="buttons" href="/add_video"><i class="fa fa-plus likes_videos"></i> Add Video</a>
-                </li>
-                <li class="nav-item">
-                    <a class="buttons" href="/logout">Log out</a>
-                </li>
+            <a class="buttons" href="/add_video"><i class="fa fa-plus likes_videos"></i> Add Video</a>
+            <a class="buttons" href="/my_videos/0">
+                My videos
+                <span class="likes_videos">{{current_user.likes}} <i class="fa fa-heart"></i></span>
+                <span class="likes_videos">{{current_user.videos}} <i class="fa fa-video-camera"></i></span>
+            </a>
+            <div class="navbar-profile likes_videos"><i class="fa fa-user"></i>&nbsp;{{current_user.login}}</div>
+            <a class="buttons buttons-transparent" href="/logout"><i class="fa fa-sign-out"></i> <span>Log out</span></a>
             {% else %}
-                <li class="nav-item">
-                    <a class="buttons" href="/register">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="buttons" href="/login">Log In</a>
-                </li>
+            <a class="buttons" href="/register">Sign Up</a>
+            <a class="buttons" href="/login">Log In</a>
             {% endif %}
-            </ul>
-        </div>
-    </nav>
+        </nav>
     </div>
 </header>
 <!-- Begin page content -->
