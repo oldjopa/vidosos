@@ -17,8 +17,8 @@ def send_mail(to, href):
         # Create MIMEMultipart message
         msg = MIMEMultipart()
         content = fp.read()
-        # content = content % ('http://mesenev.ru:1111/verify/' + href, 'http://mesenev.ru:1111/verify/' + href, 'http://mesenev.ru:1111/verify/' + href)
-        content = content % ('http://127.0.0.1:5000/verify/' + href, 'http://127.0.0.1:5000/verify/' + href, 'http://127.0.0.1:5000/verify/' + href)
+        content = content % ('http://mesenev.ru:1111/verify/' + href, 'http://mesenev.ru:1111/verify/' + href, 'http://mesenev.ru:1111/verify/' + href)
+        # content = content % ('http://127.0.0.1:5000/verify/' + href, 'http://127.0.0.1:5000/verify/' + href, 'http://127.0.0.1:5000/verify/' + href)
         body = MIMEText(content, 'html')
         msg.attach(body)
 
